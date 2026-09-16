@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Formulário Responsivo · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./formulario.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Formulário Responsivo</h1>
+      <p class="texto-fraco mb-0">
+        Onde o grid, os utilitários e os componentes finalmente se encontram.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          Formulário é onde tudo que você viu nos outros simuladores aparece de
+          uma vez. Não existe um "sistema de formulário" separado no Bootstrap:
+          é o <strong class="text-body">mesmo grid de 12 colunas</strong>
+          embrulhando campos comuns.
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <strong class="mono">.row .g-3</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                A linha do grid, com gutter — é ele que separa os campos, não
+                margem em cada um.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <strong class="mono">.col-12 .col-md-6</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Um campo por linha no celular, dois a partir do tablet. A regra
+                de sempre.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <strong class="mono">.form-control</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Só isso transforma um <code>&lt;input&gt;</code> comum em campo
+                do Bootstrap, já com 100% de largura.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="h6 fw-bold mb-2">Três detalhes que costumam passar batido</h3>
+        <ul class="texto-fraco mb-0">
+          <li class="mb-2">
+            <strong class="text-body">Toda <code>label</code> precisa de
+            <code>for</code></strong> apontando para o <code>id</code> do
+            campo. Sem isso, clicar no rótulo não foca o campo e o leitor de
+            tela não sabe o que é o quê.
+          </li>
+          <li class="mb-2">
+            <strong class="text-body"><code>form-floating</code></strong> põe o
+            rótulo dentro do campo, e ele sobe quando você digita. Exige a
+            ordem <code>input</code> e depois <code>label</code> no HTML — ao
+            contrário do normal.
+          </li>
+          <li class="mb-0">
+            <strong class="text-body">Validação é classe, não mágica</strong>:
+            <code>is-valid</code> e <code>is-invalid</code> pintam a borda e
+            revelam a <code>invalid-feedback</code>. Quem decide quando
+            aplicá-las é o seu JavaScript.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra></span>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <hr class="border-secondary" />
+
+        <div class="row g-4 mt-1">
+          <div class="col-12 col-md-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Quantos campos por linha
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-layout>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="col-12">
+                sempre 1
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="col-12 col-md-6">
+                2 a partir de md
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="col-12 col-md-6 col-xl-4">
+                3 a partir de xl
+              </button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Estilo do rótulo
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-rotulo>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="acima">
+                label em cima
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="flutuante">
+                form-floating
+              </button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Estado de validação
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-validacao>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="">
+                neutro
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="is-valid">
+                is-valid
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="is-invalid">
+                is-invalid
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <div class="palco-janela" data-janela>
+          <div class="palco" data-palco data-bp="xl">
+            <form class="row g-3" data-formulario novalidate></form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O HTML de um campo</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./formulario.js"></script>
+  </body>
+</html>

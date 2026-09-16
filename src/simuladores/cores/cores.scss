@@ -1,0 +1,150 @@
+// =============================================================
+//  Estilos do Simulador de Cores do Tema
+// =============================================================
+
+@use '../../scss/main';
+
+$papeis: primary, secondary, success, danger, warning, info;
+
+.galeria__titulo {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 0.6rem;
+}
+
+// -------------------------------------------------------------
+//  Controle de cada papel
+// -------------------------------------------------------------
+.papel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #131c33;
+}
+
+.papel input[type='color'] {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+}
+
+.papel__nome {
+  font-weight: 700;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+}
+
+.papel__hex {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+// -------------------------------------------------------------
+//  Tabela de derivação
+// -------------------------------------------------------------
+.pastilha {
+  display: inline-block;
+  width: 26px;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  vertical-align: -3px;
+  margin-right: 0.35rem;
+}
+
+.contraste-ok { color: #6ee7b7; }
+.contraste-fraco { color: #fca5a5; }
+
+// -------------------------------------------------------------
+//  A galeria lê as cores das custom properties que o JS escreve
+//
+//  Por que isto é necessário: no Bootstrap 5.3 o .btn-primary já
+//  nasce com --bs-btn-bg: #0d6efd, um valor literal vindo do Sass.
+//  Mudar --bs-primary em tempo real não mexe em nada. Então aqui
+//  cada componente é reapontado para as variáveis do laboratório.
+// -------------------------------------------------------------
+.tema {
+  @each $p in $papeis {
+    .btn-#{$p} {
+      --bs-btn-bg: var(--lab-#{$p});
+      --bs-btn-border-color: var(--lab-#{$p});
+      --bs-btn-color: var(--lab-#{$p}-texto);
+      --bs-btn-hover-bg: var(--lab-#{$p}-hover);
+      --bs-btn-hover-border-color: var(--lab-#{$p}-hover);
+      --bs-btn-hover-color: var(--lab-#{$p}-texto);
+      --bs-btn-active-bg: var(--lab-#{$p}-ativo);
+      --bs-btn-active-border-color: var(--lab-#{$p}-ativo);
+      --bs-btn-active-color: var(--lab-#{$p}-texto);
+      --bs-btn-focus-shadow-rgb: var(--lab-#{$p}-rgb);
+    }
+
+    .btn-outline-#{$p} {
+      --bs-btn-color: var(--lab-#{$p});
+      --bs-btn-border-color: var(--lab-#{$p});
+      --bs-btn-hover-bg: var(--lab-#{$p});
+      --bs-btn-hover-border-color: var(--lab-#{$p});
+      --bs-btn-hover-color: var(--lab-#{$p}-texto);
+      --bs-btn-active-bg: var(--lab-#{$p});
+      --bs-btn-active-border-color: var(--lab-#{$p});
+      --bs-btn-active-color: var(--lab-#{$p}-texto);
+      --bs-btn-focus-shadow-rgb: var(--lab-#{$p}-rgb);
+    }
+
+    .text-bg-#{$p} {
+      background-color: var(--lab-#{$p}) !important;
+      color: var(--lab-#{$p}-texto) !important;
+    }
+
+    .alert-#{$p} {
+      --bs-alert-bg: rgba(var(--lab-#{$p}-rgb), 0.16);
+      --bs-alert-border-color: rgba(var(--lab-#{$p}-rgb), 0.5);
+      --bs-alert-color: var(--lab-#{$p}-claro);
+    }
+
+    .text-#{$p} {
+      color: var(--lab-#{$p}-claro) !important;
+    }
+
+    .border-#{$p} {
+      border-color: var(--lab-#{$p}) !important;
+    }
+  }
+}
+
+.amostra-borda {
+  padding: 0.5rem 0.9rem;
+  border: 2px solid;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+// -------------------------------------------------------------
+//  Código gerado
+// -------------------------------------------------------------
+.codigo {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.82rem;
+  overflow-x: auto;
+  white-space: pre;
+
+  .tag { color: #c084fc; font-weight: 600; }
+  .variavel { color: #7dd3fc; }
+  .texto { color: #6ee7b7; }
+  .comentario { color: #64748b; font-style: italic; }
+}

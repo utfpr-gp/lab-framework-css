@@ -1,0 +1,197 @@
+// =============================================================
+//  Estilos do Simulador de Flexbox
+// =============================================================
+
+@use '../../scss/main';
+@use 'sass:list';
+
+.slider {
+  accent-color: #6366f1;
+}
+
+.opcao__titulo {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+// -------------------------------------------------------------
+//  Palco
+// -------------------------------------------------------------
+.palco-flex {
+  position: relative;
+  padding: 2.4rem;
+  border-radius: 12px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.caixa-flex {
+  position: relative;
+  height: 320px;
+  padding: 0.75rem;
+  border-radius: 10px;
+  border: 2px dashed rgba(148, 163, 184, 0.4);
+  gap: 0.75rem;
+  // com flex-nowrap os itens transbordam: a rolagem deixa isso
+  // visível sem estourar a página
+  overflow: auto;
+}
+
+// -------------------------------------------------------------
+//  Itens
+// -------------------------------------------------------------
+.item {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--largura-item, 110px);
+  min-height: 58px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: #0b1020;
+  font-weight: 700;
+  // é isto que faz os itens deslizarem em vez de pular
+  transition: all 0.4s ease-in-out;
+}
+
+$cores: #f87171, #fb923c, #facc15, #a3e635, #34d399, #22d3ee, #60a5fa, #a78bfa,
+  #f472b6, #fca5a5, #fdba74, #5eead4;
+
+@for $i from 1 through 12 {
+  .item--#{$i} {
+    background: list.nth($cores, $i);
+  }
+}
+
+// Aviso do que está acontecendo com o espaço
+.situacao {
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+
+  &--cabe {
+    background: rgba(52, 211, 153, 0.14);
+    border-color: #34d399;
+    color: #6ee7b7;
+  }
+
+  &--quebrou {
+    background: rgba(99, 102, 241, 0.16);
+    border-color: #818cf8;
+    color: #a5b4fc;
+  }
+
+  &--transbordou {
+    background: rgba(250, 204, 21, 0.14);
+    border-color: #facc15;
+    color: #fde047;
+  }
+}
+
+// -------------------------------------------------------------
+//  Os eixos desenhados por cima
+//
+//  Eles giram junto com o flex-direction — é o ponto inteiro do
+//  simulador: o aluno vê que "principal" não quer dizer horizontal.
+// -------------------------------------------------------------
+.eixos {
+  position: absolute;
+  inset: 2.4rem;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.eixo {
+  position: absolute;
+  transition: all 0.4s ease-in-out;
+
+  &__rotulo {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.1rem 0.4rem;
+    border-radius: 5px;
+    background: #0b1020;
+  }
+}
+
+.eixo--principal {
+  background: #f472b6;
+  .eixo__rotulo { color: #f9a8d4; }
+}
+
+.eixo--cruzado {
+  background: #22d3ee;
+  .eixo__rotulo { color: #67e8f9; }
+}
+
+// Linha deitada no topo, rótulo acima dela
+@mixin deitado {
+  left: 0;
+  right: 0;
+  top: -16px;
+  height: 2px;
+  width: auto;
+  bottom: auto;
+
+  .eixo__rotulo {
+    top: -18px;
+    left: 0;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+}
+
+// Linha em pé na esquerda, rótulo escrito de baixo para cima ao lado
+@mixin em-pe {
+  top: 0;
+  bottom: 0;
+  left: -16px;
+  width: 2px;
+  height: auto;
+  right: auto;
+
+  .eixo__rotulo {
+    top: 0;
+    left: -21px;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+}
+
+// Com flex-row o eixo principal é o horizontal...
+.eixos[data-direcao='row'] {
+  .eixo--principal { @include deitado; }
+  .eixo--cruzado { @include em-pe; }
+}
+
+// ...e com flex-column os dois trocam de lugar. Esta troca é o
+// ponto inteiro do simulador.
+.eixos[data-direcao='column'] {
+  .eixo--principal { @include em-pe; }
+  .eixo--cruzado { @include deitado; }
+}
+
+// -------------------------------------------------------------
+//  Código gerado
+// -------------------------------------------------------------
+.codigo {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.82rem;
+  overflow-x: auto;
+
+  .tag { color: #94a3b8; }
+  .destaque { color: #7dd3fc; font-weight: 600; }
+}

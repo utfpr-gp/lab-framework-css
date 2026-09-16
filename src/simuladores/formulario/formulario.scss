@@ -1,0 +1,29 @@
+// =============================================================
+//  Estilos do Simulador de Formulário Responsivo
+// =============================================================
+
+@use '../../scss/main';
+@use '../../scss/motor';
+
+// Os campos deslizam ao mudar de linha (animação FLIP no JS)
+.palco form > * {
+  transition: all 0.4s ease-in-out;
+}
+
+.codigo {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.82rem;
+  overflow-x: auto;
+  white-space: pre;
+
+  .tag { color: #94a3b8; }
+  .destaque { color: #7dd3fc; font-weight: 600; }
+  .atributo { color: #c084fc; }
+}
+
+// As colunas do grid reagindo à largura do palco
+@include motor.colunas;

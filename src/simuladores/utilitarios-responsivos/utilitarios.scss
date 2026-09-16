@@ -4,7 +4,6 @@
 
 @use '../../scss/main';
 @use '../../scss/motor';
-@use 'sass:map';
 
 // -------------------------------------------------------------
 //  Fórmula colorida da explicação
@@ -86,57 +85,6 @@
 }
 
 // -------------------------------------------------------------
-//  Motor: reescreve os utilitários para reagirem ao palco
-//
-//  Diferente do grid, os utilitários do Bootstrap são gerados com
-//  !important. Então as regras daqui também precisam de !important,
-//  senão perdem para as originais.
+//  Reescreve os utilitários para reagirem à largura do palco
 // -------------------------------------------------------------
-$displays: none, block, flex, inline-block;
-$direcoes: row, column;
-$justificacoes: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  between: space-between,
-  around: space-around,
-);
-$alinhamentos: (
-  start: flex-start,
-  end: flex-end,
-  center: center,
-  stretch: stretch,
-);
-$textos: (start: left, center: center, end: right);
-
-@include motor.cascata using ($bp) {
-  @each $valor in $displays {
-    .#{motor.classe('d', $bp, $valor)} {
-      display: #{$valor} !important;
-    }
-  }
-
-  @each $valor in $direcoes {
-    .#{motor.classe('flex', $bp, $valor)} {
-      flex-direction: #{$valor} !important;
-    }
-  }
-
-  @each $nome, $valor in $justificacoes {
-    .#{motor.classe('justify-content', $bp, $nome)} {
-      justify-content: #{$valor} !important;
-    }
-  }
-
-  @each $nome, $valor in $alinhamentos {
-    .#{motor.classe('align-items', $bp, $nome)} {
-      align-items: #{$valor} !important;
-    }
-  }
-
-  @each $nome, $valor in $textos {
-    .#{motor.classe('text', $bp, $nome)} {
-      text-align: #{$valor} !important;
-    }
-  }
-}
+@include motor.utilitarios;

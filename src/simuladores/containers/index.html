@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Containers · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./containers.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Containers</h1>
+      <p class="texto-fraco mb-0">
+        Por que o conteúdo "trava" numa largura e sobram faixas vazias dos
+        lados.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O container é o invólucro mais externo de qualquer página Bootstrap.
+          Ele faz três coisas: dá um respiro nas laterais, centraliza o
+          conteúdo e — no caso do <code>.container</code> — impõe uma
+          <strong class="text-body">largura máxima</strong>.
+        </p>
+
+        <p class="texto-fraco">
+          A parte que surpreende é que essa largura máxima
+          <strong class="text-body">não cresce junto com a tela</strong>: ela
+          salta em degraus a cada breakpoint e fica parada entre um degrau e
+          outro. Num monitor de 1920px, um <code>.container</code> tem
+          1320px — os 600px restantes viram margem.
+        </p>
+
+        <div class="table-responsive mb-4">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>A partir de</th>
+                <th>Largura máxima do <code>.container</code></th>
+                <th>Sobra numa tela desse tamanho</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="mono">0px</td><td class="mono">100%</td><td class="texto-fraco">nenhuma</td></tr>
+              <tr><td class="mono">576px</td><td class="mono">540px</td><td class="texto-fraco">36px</td></tr>
+              <tr><td class="mono">768px</td><td class="mono">720px</td><td class="texto-fraco">48px</td></tr>
+              <tr><td class="mono">992px</td><td class="mono">960px</td><td class="texto-fraco">32px</td></tr>
+              <tr><td class="mono">1200px</td><td class="mono">1140px</td><td class="texto-fraco">60px</td></tr>
+              <tr><td class="mono">1400px</td><td class="mono">1320px</td><td class="texto-fraco">80px</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="h6 fw-bold mb-2">As três famílias</h3>
+        <div class="row g-3">
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--a"></span><strong class="mono">container</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Trava na largura máxima do breakpoint atual. É o padrão para
+                conteúdo de leitura.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--b"></span><strong class="mono">container-fluid</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Nunca trava: sempre 100% da largura disponível. Para painéis,
+                dashboards e barras de topo.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--c"></span><strong class="mono">container-lg</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Fica fluido até <code>lg</code> e só então começa a travar.
+                Existe uma versão para cada breakpoint.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra></span>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <p class="small texto-fraco mb-3">
+          As faixas hachuradas dos lados são o espaço que sobra — a diferença
+          entre a tela e o container.
+        </p>
+
+        <div class="palco-janela" data-janela>
+          <div class="palco" data-palco data-bp="xl">
+            <div class="faixa faixa--a">
+              <div class="container caixa" data-caixa="a">
+                <span class="mono">.container</span>
+              </div>
+            </div>
+
+            <div class="faixa faixa--b">
+              <div class="container-fluid caixa" data-caixa="b">
+                <span class="mono">.container-fluid</span>
+              </div>
+            </div>
+
+            <div class="faixa faixa--c">
+              <div class="container-lg caixa" data-caixa="c">
+                <span class="mono">.container-lg</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Medidas ao vivo -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">As medidas agora</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Classe</th>
+                <th class="text-end">Largura ocupada</th>
+                <th class="text-end">Sobra de cada lado</th>
+                <th class="text-end">Está travado?</th>
+              </tr>
+            </thead>
+            <tbody data-medidas></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./containers.js"></script>
+  </body>
+</html>

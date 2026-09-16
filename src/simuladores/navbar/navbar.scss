@@ -1,0 +1,115 @@
+// =============================================================
+//  Estilos do Simulador de Navbar Responsiva
+// =============================================================
+
+@use '../../scss/main';
+@use '../../scss/motor';
+
+.formula {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.parte--o { color: #f472b6; }
+.parte--bp { color: #facc15; }
+
+.veredito {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+
+  &--colapsada {
+    background: rgba(250, 204, 21, 0.14);
+    border-color: #facc15;
+    color: #fde047;
+  }
+
+  &--expandida {
+    background: rgba(52, 211, 153, 0.14);
+    border-color: #34d399;
+    color: #6ee7b7;
+  }
+}
+
+.codigo {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.82rem;
+  overflow-x: auto;
+
+  .tag { color: #94a3b8; }
+  .destaque { color: #7dd3fc; font-weight: 600; }
+}
+
+// A navbar acompanha a mudança com calma
+.palco .navbar-collapse,
+.palco .navbar-nav {
+  transition: all 0.3s ease-in-out;
+}
+
+// -------------------------------------------------------------
+//  Motor: a expansão da navbar reagindo à largura do palco
+//
+//  O Bootstrap põe estas regras dentro de media queries. Aqui elas
+//  são reescritas por breakpoint simulado.
+//
+//  O nível xs reafirma o estado COLAPSADO com !important. Sem isso,
+//  quando o navegador de verdade é largo, a media query original do
+//  Bootstrap venceria e a navbar apareceria sempre expandida.
+// -------------------------------------------------------------
+@include motor.cascata using ($bp) {
+  @if $bp == xs {
+    // Estado colapsado: é o padrão de onde toda navbar parte.
+    //
+    // O ".collapse" no seletor não é enfeite: durante a animação de
+    // abrir, o Bootstrap troca a classe por ".collapsing". Sem o
+    // ".collapse" aqui, o menu ficaria escondido no meio da animação
+    // e abriria de estalo.
+    .navbar-collapse.collapse:not(.show) {
+      display: none !important;
+      flex-basis: 100% !important;
+    }
+
+    .navbar-collapse.collapse.show {
+      display: block !important;
+      flex-basis: 100% !important;
+    }
+
+    .navbar-toggler {
+      display: block !important;
+    }
+
+    .navbar-nav {
+      flex-direction: column !important;
+    }
+
+    .navbar {
+      flex-wrap: wrap !important;
+      justify-content: space-between !important;
+    }
+  } @else {
+    // Estado expandido, a partir deste breakpoint
+    .navbar-expand-#{$bp} {
+      flex-wrap: nowrap !important;
+      justify-content: flex-start !important;
+
+      .navbar-collapse.collapse {
+        display: flex !important;
+        flex-basis: auto !important;
+      }
+
+      .navbar-toggler {
+        display: none !important;
+      }
+
+      .navbar-nav {
+        flex-direction: row !important;
+      }
+    }
+  }
+}

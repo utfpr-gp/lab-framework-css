@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Gutters · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./gutters.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Gutters</h1>
+      <p class="texto-fraco mb-0">
+        O espaço entre as colunas não é margem. E é por isso que fundo colorido
+        em coluna dá errado.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O espaço entre colunas do Bootstrap se chama
+          <strong class="text-body">gutter</strong>, e ele é feito de um jeito
+          que quase ninguém imagina. Não existe margem entre as colunas. O que
+          existe é:
+        </p>
+
+        <ol class="texto-fraco">
+          <li class="mb-2">
+            <strong class="text-body">Padding em cada coluna</strong> — metade
+            do gutter de cada lado. É o padding que afasta o
+            <em>conteúdo</em>, não a coluna.
+          </li>
+          <li class="mb-0">
+            <strong class="text-body">Margem negativa na <code>.row</code></strong>
+            — também metade do gutter de cada lado. Ela puxa a row para fora do
+            container, cancelando o padding da primeira e da última coluna.
+          </li>
+        </ol>
+
+        <p class="texto-fraco">
+          Sem a margem negativa, as colunas das pontas ficariam com um recuo
+          que o resto da página não tem, e nada alinharia.
+        </p>
+
+        <div class="alert alert-warning small mb-0">
+          <strong>A consequência prática:</strong> se você pintar o fundo
+          direto na <code>.col</code>, o fundo ocupa também a área do padding —
+          e os blocos encostam um no outro, sem espaço visível. A solução é
+          pintar uma <strong>div interna</strong>, não a coluna. Ligue o botão
+          na simulação e veja os dois casos.
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Classe resultante
+            </p>
+            <p class="leitura mono mb-0" data-classe aria-live="polite">g-3</p>
+            <p class="texto-fraco mb-0 mt-2">
+              <span class="mono fw-semibold d-block" data-valor-px>16px</span>
+              <span class="mono d-block" data-valor-metade>8px</span>
+            </p>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="degrau" class="text-uppercase small fw-semibold texto-fraco">
+              Tamanho do gutter
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="degrau"
+              min="0"
+              max="5"
+              step="1"
+              value="3"
+            />
+            <div class="escala" data-escala aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <hr class="my-4 border-secondary" />
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Direção
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-direcao>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="g">
+                g · os dois
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="gx">
+                gx · horizontal
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="gy">
+                gy · vertical
+              </button>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Onde pintar o fundo
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-pintura>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="interna">
+                numa div interna ✓
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="coluna">
+                na própria .col ✗
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <div class="legenda d-flex flex-wrap gap-3 mb-3">
+          <span><i class="amostra amostra--container"></i> container</span>
+          <span><i class="amostra amostra--row"></i> área da .row (margem negativa)</span>
+          <span><i class="amostra amostra--padding"></i> padding da coluna</span>
+          <span><i class="amostra amostra--conteudo"></i> conteúdo</span>
+        </div>
+
+        <div class="demo-container">
+          <div class="row g-3" data-linha></div>
+        </div>
+
+        <p class="small texto-fraco mb-0 mt-3" data-nota></p>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O HTML que você acabou de montar</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./gutters.js"></script>
+  </body>
+</html>

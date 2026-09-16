@@ -5,7 +5,6 @@
 @use '../../scss/main';
 @use '../../scss/motor';
 @use 'sass:list';
-@use 'sass:math';
 
 // Os blocos coloridos
 .bloco {
@@ -33,11 +32,4 @@ $cores: #f87171, #fb923c, #facc15, #a3e635, #34d399, #22d3ee, #60a5fa, #a78bfa,
 }
 
 // Reescreve as classes col-* para reagirem à largura do palco
-@include motor.cascata using ($bp) {
-  @for $n from 1 through 12 {
-    .#{motor.classe('col', $bp, $n)} {
-      flex: 0 0 auto;
-      width: math.percentage(math.div($n, 12));
-    }
-  }
-}
+@include motor.colunas;

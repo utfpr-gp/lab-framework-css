@@ -18,124 +18,195 @@
     </header>
 
     <main class="container pb-5">
-      <h2 class="h4 fw-bold mb-3">Simuladores</h2>
+      <!-- ============================================ -->
+      <!--  LAYOUT E GRID                               -->
+      <!-- ============================================ -->
+      <h2 class="h4 fw-bold mb-1">Layout e grid</h2>
+      <p class="texto-fraco mb-3">
+        Como o Bootstrap divide a tela e por que às vezes ela não divide do
+        jeito que você esperava.
+      </p>
 
-      <div class="row g-4">
-        <!-- Simulador 01 -->
+      <div class="row g-4 mb-5">
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card-simulador painel h-100 p-4 d-flex flex-column">
-            <span class="badge text-bg-primary align-self-start mb-3">
-              Grid
-            </span>
-
+            <span class="badge text-bg-primary align-self-start mb-3">01</span>
             <h3 class="h5 fw-bold">Grid Responsivo</h3>
-
             <p class="texto-fraco small flex-grow-1">
               Arraste a largura da tela de 320px a 1600px e veja as classes
               <code>col-md-6</code>, <code>col-lg-4</code> e
               <code>col-xl-3</code> assumindo o controle do layout.
             </p>
-
-            <a
-              href="./src/simuladores/bootstrap-grid/index.html"
-              class="btn btn-primary w-100"
-            >
+            <a href="./src/simuladores/bootstrap-grid/index.html" class="btn btn-primary w-100">
               Abrir simulador
             </a>
           </div>
         </div>
 
-        <!-- Simulador 02 -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card-simulador painel h-100 p-4 d-flex flex-column">
-            <span class="badge text-bg-primary align-self-start mb-3">
-              Grid
-            </span>
-
+            <span class="badge text-bg-primary align-self-start mb-3">02</span>
             <h3 class="h5 fw-bold">Grid Avançado</h3>
-
             <p class="texto-fraco small flex-grow-1">
               Controle quanto cada bloco ocupa e veja a soma passar de 12 e a
               linha quebrar. Entra <code>offset-*</code>, <code>order-*</code> e
               o <code>col</code> sem número.
             </p>
-
-            <a
-              href="./src/simuladores/grid-avancado/index.html"
-              class="btn btn-primary w-100"
-            >
+            <a href="./src/simuladores/grid-avancado/index.html" class="btn btn-primary w-100">
               Abrir simulador
             </a>
           </div>
         </div>
 
-        <!-- Simulador 03 -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card-simulador painel h-100 p-4 d-flex flex-column">
-            <span class="badge text-bg-info align-self-start mb-3">
-              Responsividade
-            </span>
+            <span class="badge text-bg-primary align-self-start mb-3">03</span>
+            <h3 class="h5 fw-bold">Containers</h3>
+            <p class="texto-fraco small flex-grow-1">
+              Por que o conteúdo trava numa largura e sobram faixas vazias.
+              <code>container</code>, <code>container-fluid</code> e
+              <code>container-lg</code> medidos lado a lado.
+            </p>
+            <a href="./src/simuladores/containers/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
 
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-primary align-self-start mb-3">04</span>
+            <h3 class="h5 fw-bold">Gutters</h3>
+            <p class="texto-fraco small flex-grow-1">
+              O espaço entre colunas não é margem: é padding na coluna mais
+              margem negativa na <code>.row</code>. E é por isso que fundo
+              colorido em <code>.col</code> dá errado.
+            </p>
+            <a href="./src/simuladores/gutters/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-primary align-self-start mb-3">05</span>
+            <h3 class="h5 fw-bold">Flexbox</h3>
+            <p class="texto-fraco small flex-grow-1">
+              Os eixos desenhados na tela, girando junto com
+              <code>flex-direction</code>. É aqui que
+              <code>justify-content</code> para de ser "horizontal".
+            </p>
+            <a href="./src/simuladores/flexbox/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!--  RESPONSIVIDADE                              -->
+      <!-- ============================================ -->
+      <h2 class="h4 fw-bold mb-1">Responsividade</h2>
+      <p class="texto-fraco mb-3">
+        O que acontece fora do grid quando a tela muda de tamanho.
+      </p>
+
+      <div class="row g-4 mb-5">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-info align-self-start mb-3">06</span>
             <h3 class="h5 fw-bold">Utilitários Responsivos</h3>
-
             <p class="texto-fraco small flex-grow-1">
               O mesmo slider de largura, mas agora mostrando elementos
               aparecendo e sumindo com <code>d-none d-md-block</code>,
               <code>flex-column flex-md-row</code> e companhia.
             </p>
-
-            <a
-              href="./src/simuladores/utilitarios-responsivos/index.html"
-              class="btn btn-primary w-100"
-            >
+            <a href="./src/simuladores/utilitarios-responsivos/index.html" class="btn btn-primary w-100">
               Abrir simulador
             </a>
           </div>
         </div>
 
-        <!-- Simulador 04 -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card-simulador painel h-100 p-4 d-flex flex-column">
-            <span class="badge text-bg-warning align-self-start mb-3">
-              Utilitários
-            </span>
+            <span class="badge text-bg-info align-self-start mb-3">07</span>
+            <h3 class="h5 fw-bold">Navbar Responsiva</h3>
+            <p class="texto-fraco small flex-grow-1">
+              Onde exatamente o menu vira hambúrguer. Troque o breakpoint de
+              <code>navbar-expand-*</code> e descubra por que ele não quer dizer
+              o que parece.
+            </p>
+            <a href="./src/simuladores/navbar/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
+      </div>
 
+      <!-- ============================================ -->
+      <!--  ESTILO E COMPONENTES                        -->
+      <!-- ============================================ -->
+      <h2 class="h4 fw-bold mb-1">Estilo e componentes</h2>
+      <p class="texto-fraco mb-3">
+        Espaçamento, cores e as peças prontas que você monta com classes.
+      </p>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-warning align-self-start mb-3">08</span>
             <h3 class="h5 fw-bold">Escala de Espaçamento</h3>
-
             <p class="texto-fraco small flex-grow-1">
               Percorra a escala de <code>0</code> a <code>5</code> e veja quanto
               vale cada degrau em rem e em pixels — e a diferença entre
               <code>m-*</code> e <code>p-*</code>.
             </p>
-
-            <a
-              href="./src/simuladores/espacamento/index.html"
-              class="btn btn-primary w-100"
-            >
+            <a href="./src/simuladores/espacamento/index.html" class="btn btn-primary w-100">
               Abrir simulador
             </a>
           </div>
         </div>
 
-        <!-- Simulador 05 -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card-simulador painel h-100 p-4 d-flex flex-column">
-            <span class="badge text-bg-success align-self-start mb-3">
-              Componentes
-            </span>
+            <span class="badge text-bg-warning align-self-start mb-3">09</span>
+            <h3 class="h5 fw-bold">Cores do Tema</h3>
+            <p class="texto-fraco small flex-grow-1">
+              Mude <code>$primary</code> e veja vinte componentes mudarem junto,
+              com o hover, o clique e a cor do texto sendo derivados na hora.
+            </p>
+            <a href="./src/simuladores/cores/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
 
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-success align-self-start mb-3">10</span>
             <h3 class="h5 fw-bold">Montador de Componentes</h3>
-
             <p class="texto-fraco small flex-grow-1">
               Ligue modificadores (<code>btn-lg</code>,
               <code>btn-outline-primary</code>, <code>rounded-pill</code>) e veja
               o HTML sendo escrito ao lado do resultado.
             </p>
+            <a href="./src/simuladores/componentes/index.html" class="btn btn-primary w-100">
+              Abrir simulador
+            </a>
+          </div>
+        </div>
 
-            <a
-              href="./src/simuladores/componentes/index.html"
-              class="btn btn-primary w-100"
-            >
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-success align-self-start mb-3">11</span>
+            <h3 class="h5 fw-bold">Formulário Responsivo</h3>
+            <p class="texto-fraco small flex-grow-1">
+              Onde o grid, os utilitários e os componentes se encontram:
+              <code>form-floating</code>, validação e campos se reorganizando
+              conforme a tela.
+            </p>
+            <a href="./src/simuladores/formulario/index.html" class="btn btn-primary w-100">
               Abrir simulador
             </a>
           </div>

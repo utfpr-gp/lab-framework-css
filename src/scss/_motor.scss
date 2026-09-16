@@ -6,6 +6,7 @@
 // =============================================================
 
 @use 'sass:list';
+@use 'sass:math';
 
 // Breakpoints do Bootstrap 5, em ordem mobile-first
 $ordem: xs, sm, md, lg, xl, xxl;
@@ -49,6 +50,78 @@ $ordem: xs, sm, md, lg, xl, xxl;
   }
 
   @return $nome;
+}
+
+// -------------------------------------------------------------
+//  Geradores prontos, para as páginas não repetirem o mesmo loop
+// -------------------------------------------------------------
+
+/// As classes col-* do grid de 12 colunas.
+@mixin colunas {
+  @include cascata using ($bp) {
+    @for $n from 1 through 12 {
+      .#{classe('col', $bp, $n)} {
+        flex: 0 0 auto;
+        width: math.percentage(math.div($n, 12));
+      }
+    }
+  }
+}
+
+/// Os utilitários responsivos mais usados.
+///
+/// Diferente do grid, os utilitários do Bootstrap são gerados com
+/// !important. Então as regras daqui também precisam, senão perdem
+/// para as originais quando o navegador de verdade é largo.
+@mixin utilitarios {
+  $displays: none, block, flex, inline-block;
+  $direcoes: row, column;
+  $justificacoes: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    around: space-around,
+  );
+  $alinhamentos: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch,
+  );
+  $textos: (start: left, center: center, end: right);
+
+  @include cascata using ($bp) {
+    @each $valor in $displays {
+      .#{classe('d', $bp, $valor)} {
+        display: #{$valor} !important;
+      }
+    }
+
+    @each $valor in $direcoes {
+      .#{classe('flex', $bp, $valor)} {
+        flex-direction: #{$valor} !important;
+      }
+    }
+
+    @each $nome, $valor in $justificacoes {
+      .#{classe('justify-content', $bp, $nome)} {
+        justify-content: #{$valor} !important;
+      }
+    }
+
+    @each $nome, $valor in $alinhamentos {
+      .#{classe('align-items', $bp, $nome)} {
+        align-items: #{$valor} !important;
+      }
+    }
+
+    @each $nome, $valor in $textos {
+      .#{classe('text', $bp, $nome)} {
+        text-align: #{$valor} !important;
+      }
+    }
+  }
 }
 
 // -------------------------------------------------------------

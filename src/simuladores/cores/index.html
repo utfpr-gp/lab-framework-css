@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Cores do Tema · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./cores.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Cores do Tema</h1>
+      <p class="texto-fraco mb-0">
+        Mude uma variável e veja vinte componentes mudarem junto.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          As cores do Bootstrap não são cores: são
+          <strong class="text-body">papéis</strong>. <code>primary</code> não
+          quer dizer "azul", quer dizer "a cor principal da sua marca".
+          <code>danger</code> não é "vermelho", é "algo deu errado". Por isso
+          um botão se chama <code>btn-primary</code> e não
+          <code>btn-azul</code> — se amanhã a marca virar roxa, o nome da
+          classe continua fazendo sentido.
+        </p>
+
+        <p class="texto-fraco">
+          Trocar uma dessas cores é mexer numa variável Sass antes de importar
+          o Bootstrap. Uma linha, e todos os componentes que usam aquele papel
+          mudam de uma vez:
+        </p>
+
+        <pre class="codigo mb-3"><code><span class="comentario">// no seu main.scss</span>
+<span class="tag">@use</span> <span class="texto">'bootstrap/scss/bootstrap'</span> <span class="tag">with</span> (
+  <span class="variavel">$primary</span>: <span class="texto">#6366f1</span>,
+  <span class="variavel">$danger</span>:  <span class="texto">#dc3545</span>
+);</code></pre>
+
+        <p class="texto-fraco">
+          O Bootstrap então <strong class="text-body">deriva</strong> o resto
+          sozinho: o tom de hover (a cor escurecida um pouco), o de clique
+          (mais escurecida ainda) e — o detalhe mais interessante — a
+          <strong class="text-body">cor do texto</strong> que vai por cima.
+        </p>
+
+        <p class="texto-fraco">
+          Essa escolha do texto tem uma regra que surpreende: ela não pega
+          simplesmente o que contrasta mais. O Bootstrap
+          <strong class="text-body">tenta o branco primeiro</strong> e fica com
+          ele se passar de <code>4.5:1</code> — a razão mínima de contraste da
+          WCAG. Só se o branco não alcançar é que ele tenta o preto. Repare na
+          tabela mais abaixo: arraste uma cor até o limite e veja o texto
+          virar.
+        </p>
+
+        <div class="alert alert-info small mb-0">
+          Abaixo os controles fazem essa mesma derivação em tempo real, no
+          navegador, para você ver o efeito na hora. Num projeto de verdade
+          isso acontece uma vez só, na compilação do Sass.
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <h2 class="h5 fw-bold mb-0">Os papéis do tema</h2>
+          <button type="button" class="btn btn-sm btn-outline-light" data-reiniciar>
+            Voltar às cores originais
+          </button>
+        </div>
+
+        <div class="row g-3" data-controles></div>
+      </section>
+
+      <!-- Galeria -->
+      <section class="painel p-4 mb-4 tema" data-tema>
+        <h2 class="h6 fw-bold mb-4">Tudo isto usa as cores acima</h2>
+
+        <div class="mb-4">
+          <p class="galeria__titulo">Botões sólidos</p>
+          <div class="d-flex flex-wrap gap-2" data-galeria="solidos"></div>
+        </div>
+
+        <div class="mb-4">
+          <p class="galeria__titulo">Botões de contorno</p>
+          <div class="d-flex flex-wrap gap-2" data-galeria="contorno"></div>
+        </div>
+
+        <div class="mb-4">
+          <p class="galeria__titulo">Badges (com contraste automático)</p>
+          <div class="d-flex flex-wrap gap-2" data-galeria="badges"></div>
+        </div>
+
+        <div class="mb-4">
+          <p class="galeria__titulo">Alertas</p>
+          <div data-galeria="alertas"></div>
+        </div>
+
+        <div class="mb-0">
+          <p class="galeria__titulo">Texto, links e bordas</p>
+          <div class="d-flex flex-wrap gap-3" data-galeria="textos"></div>
+        </div>
+      </section>
+
+      <!-- Derivação -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h6 fw-bold mb-3">O que o Bootstrap deriva de cada cor</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Papel</th>
+                <th>Base</th>
+                <th>Hover</th>
+                <th>Clique</th>
+                <th>Texto por cima</th>
+                <th class="text-end">Contraste</th>
+              </tr>
+            </thead>
+            <tbody data-derivacao></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O Sass que produz este tema</h2>
+        <pre class="codigo mb-3"><code data-codigo></code></pre>
+        <button type="button" class="btn btn-sm btn-outline-light" data-copiar>
+          Copiar
+        </button>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./cores.js"></script>
+  </body>
+</html>

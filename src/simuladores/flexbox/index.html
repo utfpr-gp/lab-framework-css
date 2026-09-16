@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Flexbox · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./flexbox.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Flexbox</h1>
+      <p class="texto-fraco mb-0">
+        O eixo principal é quem manda. Vire a direção e veja
+        <code>justify-content</code> trocar de lado.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          Quase todo mundo decora que <code>justify-content</code> alinha na
+          horizontal e <code>align-items</code> na vertical. Isso está
+          <strong class="text-body">errado</strong> — e é por isso que, mais
+          cedo ou mais tarde, o alinhamento sai no lugar inesperado.
+        </p>
+
+        <p class="texto-fraco">
+          O certo é: <code>justify-content</code> alinha ao longo do
+          <strong class="text-body">eixo principal</strong> e
+          <code>align-items</code> ao longo do
+          <strong class="text-body">eixo cruzado</strong>. Quem define qual é
+          qual é o <code>flex-direction</code>:
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-6">
+            <div class="painel p-3 h-100">
+              <strong class="mono">flex-row</strong>
+              <span class="texto-fraco small">(padrão)</span>
+              <p class="texto-fraco small mb-0 mt-2">
+                Eixo principal <strong class="text-body">horizontal</strong> →
+                <code>justify-content</code> mexe na horizontal e
+                <code>align-items</code> na vertical.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="painel p-3 h-100">
+              <strong class="mono">flex-column</strong>
+              <p class="texto-fraco small mb-0 mt-2">
+                Eixo principal <strong class="text-body">vertical</strong> →
+                os dois <strong class="text-body">trocam de papel</strong>.
+                Agora <code>justify-content</code> mexe na vertical.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="texto-fraco mb-0">
+          No Bootstrap tudo isso vira classe utilitária:
+          <code>d-flex</code> liga o flexbox, <code>flex-column</code> vira o
+          eixo, <code>justify-content-between</code> e
+          <code>align-items-center</code> alinham. Os nomes são idênticos aos
+          do CSS, só com prefixo.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4" data-controles></div>
+
+        <hr class="my-4 border-secondary" />
+
+        <div class="row g-4 align-items-end">
+          <div class="col-12 col-md-5">
+            <label for="itens" class="text-uppercase small fw-semibold texto-fraco d-block mb-2">
+              Quantidade de itens ·
+              <span class="mono text-body" data-total>4</span>
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="itens"
+              min="2"
+              max="12"
+              step="1"
+              value="4"
+            />
+          </div>
+
+          <div class="col-12 col-md-5">
+            <label for="largura-item" class="text-uppercase small fw-semibold texto-fraco d-block mb-2">
+              Largura de cada item ·
+              <span class="mono text-body" data-largura-item>110px</span>
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura-item"
+              min="60"
+              max="260"
+              step="5"
+              value="110"
+            />
+          </div>
+
+          <div class="col-12 col-md-2 text-md-end">
+            <button type="button" class="btn btn-sm btn-outline-light" data-reiniciar>
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <p class="mb-0 mt-4" data-situacao></p>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <div class="palco-flex">
+          <!-- Os eixos, desenhados por cima e girando junto -->
+          <div class="eixos" data-eixos aria-hidden="true">
+            <div class="eixo eixo--principal">
+              <span class="eixo__rotulo">eixo principal · justify-content</span>
+            </div>
+            <div class="eixo eixo--cruzado">
+              <span class="eixo__rotulo">eixo cruzado · align-items</span>
+            </div>
+          </div>
+
+          <div class="caixa-flex d-flex" data-caixa></div>
+        </div>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O HTML que você acabou de montar</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./flexbox.js"></script>
+  </body>
+</html>

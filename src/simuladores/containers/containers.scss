@@ -1,0 +1,99 @@
+// =============================================================
+//  Estilos do Simulador de Containers
+// =============================================================
+
+@use '../../scss/main';
+@use '../../scss/motor';
+@use 'sass:map';
+@use 'sass:list';
+
+.ponto {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.ponto--a { background: #6366f1; }
+.ponto--b { background: #34d399; }
+.ponto--c { background: #f472b6; }
+
+// -------------------------------------------------------------
+//  Cada faixa representa a largura total da tela simulada.
+//  O hachurado é o que sobra dos lados do container.
+// -------------------------------------------------------------
+.faixa {
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(248, 113, 113, 0.18) 0 8px,
+    transparent 8px 16px
+  );
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.caixa {
+  display: grid;
+  place-items: center;
+  height: 58px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0b1020;
+  // acompanha a mudança de largura máxima em vez de saltar
+  transition: max-width 0.4s ease-in-out, width 0.4s ease-in-out;
+}
+
+.faixa--a .caixa { background: #818cf8; }
+.faixa--b .caixa { background: #34d399; }
+.faixa--c .caixa { background: #f472b6; }
+
+.travado {
+  color: #fde047;
+  font-weight: 600;
+}
+
+.solto {
+  color: #6ee7b7;
+}
+
+// -------------------------------------------------------------
+//  Motor: as larguras máximas de container reagindo ao palco
+//
+//  O Bootstrap gera isto dentro de media queries. Aqui a mesma
+//  tabela é reescrita por breakpoint simulado — e como cada nível
+//  vem depois do anterior, o último que se aplica é o que vale,
+//  igual à cascata original.
+// -------------------------------------------------------------
+$larguras: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+);
+
+@include motor.cascata using ($bp) {
+  @if $bp != xs {
+    // .container-#{$bp} e todos os menores também travam neste degrau
+    $alvos: ('.container');
+
+    @each $menor in (sm, md, lg, xl, xxl) {
+      @if list.index((sm, md, lg, xl, xxl), $menor) <=
+        list.index((sm, md, lg, xl, xxl), $bp)
+      {
+        $alvos: list.append($alvos, '.container-#{$menor}', comma);
+      }
+    }
+
+    #{$alvos} {
+      max-width: map.get($larguras, $bp);
+    }
+  }
+}

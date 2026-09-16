@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Navbar Responsiva · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./navbar.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Navbar Responsiva</h1>
+      <p class="texto-fraco mb-0">
+        Onde exatamente o menu vira hambúrguer — e por que
+        <code>navbar-expand-lg</code> não quer dizer o que parece.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          A navbar do Bootstrap nasce <strong class="text-body">colapsada</strong>:
+          links empilhados, escondidos atrás de um botão. A classe
+          <code>navbar-expand-*</code> é quem diz a partir de onde ela se
+          abre.
+        </p>
+
+        <p class="formula mono text-center my-4">
+          <span class="parte parte--o">navbar-expand</span>-<span class="parte parte--bp">lg</span>
+        </p>
+
+        <div class="alert alert-warning small">
+          <strong>A leitura correta:</strong> "expande a partir de 992px". Ou
+          seja, <em>abaixo</em> de 992px ela fica em hambúrguer. Muita gente lê
+          ao contrário — como se <code>lg</code> fosse onde ela colapsa.
+        </div>
+
+        <h3 class="h6 fw-bold mb-2 mt-4">O que muda quando ela expande</h3>
+        <div class="table-responsive mb-0">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Colapsada (tela estreita)</th>
+                <th>Expandida (tela larga)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="mono">.navbar-toggler</td>
+                <td class="texto-fraco">visível</td>
+                <td class="texto-fraco">escondido</td>
+              </tr>
+              <tr>
+                <td class="mono">.navbar-collapse</td>
+                <td class="texto-fraco">escondido até clicar</td>
+                <td class="texto-fraco">sempre visível</td>
+              </tr>
+              <tr>
+                <td class="mono">.navbar-nav</td>
+                <td class="texto-fraco">empilhado (column)</td>
+                <td class="texto-fraco">em linha (row)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra></span>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <hr class="border-secondary" />
+
+        <p class="text-uppercase small fw-semibold texto-fraco mb-2 mt-4">
+          Classe de expansão
+        </p>
+        <div class="d-flex flex-wrap gap-2" data-expand>
+          <button type="button" class="btn btn-sm btn-outline-light" data-valor="sm">
+            navbar-expand-sm
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light" data-valor="md">
+            navbar-expand-md
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light active" data-valor="lg">
+            navbar-expand-lg
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light" data-valor="xl">
+            navbar-expand-xl
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light" data-valor="xxl">
+            navbar-expand-xxl
+          </button>
+        </div>
+
+        <p class="mt-3 mb-0" data-veredito></p>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <p class="small texto-fraco mb-3">
+          Quando o botão aparecer, clique nele — o menu abre de verdade.
+        </p>
+
+        <div class="palco-janela" data-janela>
+          <div class="palco" data-palco data-bp="xl">
+            <nav class="navbar navbar-expand-lg bg-dark rounded" data-navbar>
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">MinhaPágina</a>
+
+                <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#menu"
+                  aria-controls="menu"
+                  aria-expanded="false"
+                  aria-label="Abrir menu"
+                >
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="menu">
+                  <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#">Início</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                  </ul>
+                  <a class="btn btn-primary btn-sm" href="#">Entrar</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">A classe que está valendo</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./navbar.js"></script>
+  </body>
+</html>
