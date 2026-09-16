@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratório de Frameworks CSS</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/scss/main.scss" />
+  </head>
+
+  <body>
+    <header class="container py-5 text-center">
+      <h1 class="display-4 fw-bold mb-3">Laboratório de Frameworks CSS</h1>
+      <p class="fs-5 texto-fraco mb-0">
+        Portal de Simuladores Web — conceitos abstratos virando interface que
+        você arrasta e vê reagindo.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <h2 class="h4 fw-bold mb-3">Simuladores</h2>
+
+      <div class="row g-4">
+        <!-- Simulador 01 -->
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card-simulador painel h-100 p-4 d-flex flex-column">
+            <span class="badge text-bg-primary align-self-start mb-3">
+              Bootstrap 5
+            </span>
+
+            <h3 class="h5 fw-bold">Simulador de Grid Responsivo</h3>
+
+            <p class="texto-fraco small flex-grow-1">
+              Arraste a largura da tela de 320px a 1600px e veja as classes
+              <code>col-md-6</code>, <code>col-lg-4</code> e
+              <code>col-xl-3</code> assumindo o controle do layout.
+            </p>
+
+            <a
+              href="/src/simuladores/bootstrap-grid/index.html"
+              class="btn btn-primary w-100"
+            >
+              Abrir simulador
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">
+        Portal de Simuladores Web · v1.0 — Vite + Bootstrap 5 + SCSS
+      </p>
+    </footer>
+  </body>
+</html>

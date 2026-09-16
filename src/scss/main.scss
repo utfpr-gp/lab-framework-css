@@ -1,0 +1,46 @@
+// =============================================================
+//  main.scss — estilo base de todo o laboratório
+//  Bootstrap 5 completo + um tema escuro enxuto.
+// =============================================================
+
+@use 'bootstrap/scss/bootstrap' with (
+  $primary: #6366f1,
+  $body-bg: #0b1020
+);
+
+$borda: rgba(148, 163, 184, 0.2);
+
+body {
+  background: #0b1020;
+  color: #e8ecf6;
+  min-height: 100vh;
+}
+
+// Caixa padrão usada nos cards e painéis
+.painel {
+  background: #131c33;
+  border: 1px solid $borda;
+  border-radius: 14px;
+}
+
+.texto-fraco {
+  color: #94a3b8;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+code {
+  color: #7dd3fc;
+}
+
+// Cartões da home
+.card-simulador {
+  transition: transform 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: #6366f1;
+  }
+}

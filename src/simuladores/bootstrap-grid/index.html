@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Grid Responsivo · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="./grid-simulator.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="/index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Simulador de Grid Responsivo</h1>
+      <p class="texto-fraco mb-0">
+        Como o Bootstrap decide quantas colunas cabem em cada tamanho de tela.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O Bootstrap divide qualquer linha (<code>.row</code>) em
+          <strong class="text-body">12 colunas</strong>. Cada filho declara
+          quantas dessas 12 colunas quer ocupar. Se um bloco ocupa 4, cabem 3
+          por linha (12 ÷ 4 = 3).
+        </p>
+
+        <p class="texto-fraco">
+          A parte responsiva vem dos <strong class="text-body">breakpoints</strong>:
+          faixas de largura de tela. A regra é
+          <strong class="text-body">mobile-first</strong> — uma classe vale da
+          sua largura mínima <em>para cima</em>, até que outra maior assuma.
+        </p>
+
+        <div class="table-responsive mb-3">
+          <table class="table table-sm table-dark align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Breakpoint</th>
+                <th>Vale a partir de</th>
+                <th>Media query gerada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>xs</code></td><td>0px</td><td class="mono texto-fraco">(nenhuma — é o padrão)</td></tr>
+              <tr><td><code>sm</code></td><td>576px</td><td class="mono texto-fraco">min-width: 576px</td></tr>
+              <tr><td><code>md</code></td><td>768px</td><td class="mono texto-fraco">min-width: 768px</td></tr>
+              <tr><td><code>lg</code></td><td>992px</td><td class="mono texto-fraco">min-width: 992px</td></tr>
+              <tr><td><code>xl</code></td><td>1200px</td><td class="mono texto-fraco">min-width: 1200px</td></tr>
+              <tr><td><code>xxl</code></td><td>1400px</td><td class="mono texto-fraco">min-width: 1400px</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="texto-fraco mb-2">
+          Os 12 blocos do simulador abaixo usam exatamente estas classes:
+        </p>
+
+        <pre class="painel p-3 mb-3 mono small"><code>&lt;div class="col-12 col-md-6 col-lg-4 col-xl-3"&gt;</code></pre>
+
+        <p class="texto-fraco mb-0">
+          Traduzindo: <strong class="text-body">1 por linha</strong> no celular
+          (12 de 12), <strong class="text-body">2</strong> a partir de 768px (6
+          de 12), <strong class="text-body">3</strong> a partir de 992px (4 de
+          12) e <strong class="text-body">4</strong> a partir de 1200px (3 de
+          12). Arraste o controle abaixo e veja acontecer.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center">
+          <!-- Leitura em tempo real -->
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra>
+                a partir de 1200px
+              </span>
+            </div>
+          </div>
+
+          <!-- Slider -->
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <!-- Régua com as marcas dos breakpoints -->
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <hr class="my-4 border-secondary" />
+
+        <div class="row g-3">
+          <div class="col-6 col-lg-3">
+            <span class="d-block small texto-fraco">Classe no comando</span>
+            <span class="fs-5 fw-semibold mono" data-classe-ativa>col-xl-3</span>
+          </div>
+          <div class="col-6 col-lg-3">
+            <span class="d-block small texto-fraco">Colunas ocupadas</span>
+            <span class="fs-5 fw-semibold" data-colunas>3 de 12</span>
+          </div>
+          <div class="col-6 col-lg-3">
+            <span class="d-block small texto-fraco">Blocos por linha</span>
+            <span class="fs-5 fw-semibold" data-por-linha>4</span>
+          </div>
+          <div class="col-6 col-lg-3">
+            <span class="d-block small texto-fraco">Zoom do palco</span>
+            <span class="fs-5 fw-semibold mono" data-zoom>100%</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4">
+        <div class="palco-janela" data-janela>
+          <!-- DIV PAI: largura controlada pelo JS, com transition -->
+          <div class="palco" data-palco data-bp="xl">
+            <div class="row g-3" data-linha>
+              <!-- os 12 blocos são gerados pelo grid-simulator.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">
+        Portal de Simuladores Web · v1.0
+      </p>
+    </footer>
+
+    <script type="module" src="./grid-simulator.js"></script>
+  </body>
+</html>

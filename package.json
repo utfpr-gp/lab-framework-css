@@ -1,0 +1,20 @@
+{
+  "name": "lab-framework-css",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Portal de Simuladores Web - Laboratorio interativo de Frameworks CSS",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.104.1",
+    "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8"
+  }
+}
