@@ -34,3 +34,15 @@ src/
 
 Cada página segue o mesmo roteiro: primeiro **explica o conceito**, depois
 **deixa o aluno mexer nele**.
+
+## Publicação
+
+O site é publicado no GitHub Pages a cada push na `main`, pelo workflow
+`.github/workflows/deploy.yml`.
+
+Para ligar (uma vez só): **Settings → Pages → Source: GitHub Actions**.
+
+URL: https://utfpr-gp.github.io/lab-framework-css/
+
+O `base: './'` no `vite.config.js` gera caminhos relativos, então o mesmo
+build funciona tanto localmente quanto no subdiretório do Pages.
