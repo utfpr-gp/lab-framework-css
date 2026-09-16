@@ -1,0 +1,130 @@
+// =============================================================
+//  Estilos do Montador de Componentes
+// =============================================================
+
+@use '../../scss/main';
+
+// -------------------------------------------------------------
+//  Fórmula colorida
+// -------------------------------------------------------------
+.formula {
+  font-size: 1.3rem;
+  font-weight: 700;
+
+  .parte {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    margin: 0.2rem;
+  }
+}
+
+.parte--base {
+  background: rgba(244, 114, 182, 0.18);
+  border: 1px solid #f472b6;
+  color: #f9a8d4;
+}
+
+.parte--mod {
+  background: rgba(52, 211, 153, 0.15);
+  border: 1px solid #34d399;
+  color: #6ee7b7;
+}
+
+.ponto {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+.ponto--base { background: #f472b6; }
+.ponto--mod { background: #34d399; }
+
+// -------------------------------------------------------------
+//  Vitrine do componente
+// -------------------------------------------------------------
+.vitrine {
+  display: grid;
+  place-items: center;
+  min-height: 190px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(148, 163, 184, 0.05) 0 10px,
+    transparent 10px 20px
+  );
+
+  // Garante que alert e card ocupem a largura da vitrine
+  > * {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  // ...menos os que são naturalmente pequenos
+  > .btn,
+  > .badge {
+    width: auto;
+  }
+}
+
+// -------------------------------------------------------------
+//  Controles
+// -------------------------------------------------------------
+.opcao__titulo {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  margin-bottom: 0.5rem;
+}
+
+.opcao__dica {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #94a3b8;
+}
+
+// Bolinha de cor dentro do botão de variante
+.amostra {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.35rem;
+  vertical-align: -1px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+// -------------------------------------------------------------
+//  Código gerado
+// -------------------------------------------------------------
+.codigo {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0b1020;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+
+  .tag {
+    color: #94a3b8;
+  }
+
+  .base {
+    color: #f9a8d4;
+    font-weight: 700;
+  }
+
+  .mod {
+    color: #6ee7b7;
+    font-weight: 600;
+  }
+}

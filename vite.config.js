@@ -3,6 +3,9 @@ import { resolve } from 'node:path';
 
 const raiz = resolve(process.cwd());
 
+/** Caminho do index.html de um simulador. */
+const pagina = (nome) => resolve(raiz, `src/simuladores/${nome}/index.html`);
+
 export default defineConfig({
   // Caminhos relativos: o site roda tanto em / (local) quanto em
   // /lab-framework-css/ (GitHub Pages) sem precisar mudar nada.
@@ -14,10 +17,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: resolve(raiz, 'index.html'),
-        'bootstrap-grid': resolve(
-          raiz,
-          'src/simuladores/bootstrap-grid/index.html'
-        ),
+        'bootstrap-grid': pagina('bootstrap-grid'),
+        'grid-avancado': pagina('grid-avancado'),
+        'utilitarios-responsivos': pagina('utilitarios-responsivos'),
+        espacamento: pagina('espacamento'),
+        componentes: pagina('componentes'),
       },
     },
   },

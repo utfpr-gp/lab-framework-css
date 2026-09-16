@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Utilitários Responsivos · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./utilitarios.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Utilitários Responsivos</h1>
+      <p class="texto-fraco mb-0">
+        Esconder, mostrar, virar de lado e realinhar — sem escrever uma media
+        query.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O grid não é a única coisa responsiva do Bootstrap. Quase todo
+          utilitário aceita um <strong class="text-body">infixo de
+          breakpoint</strong> no meio do nome, e a leitura é sempre a mesma:
+        </p>
+
+        <p class="formula mono text-center my-4">
+          <span class="parte parte--o">d</span>-<span class="parte parte--bp">md</span>-<span class="parte parte--v">none</span>
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--o"></span>
+              <strong class="mono">d</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                A propriedade — aqui, <code>display</code>.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--bp"></span>
+              <strong class="mono">md</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                A partir de qual tela vale. Sem infixo = vale desde 0px.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--v"></span>
+              <strong class="mono">none</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                O valor que a propriedade recebe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="texto-fraco mb-0">
+          A pegadinha mais comum: <code>d-none d-md-block</code> não quer dizer
+          "esconde no md". Quer dizer
+          <strong class="text-body">"esconde sempre, e a partir de 768px
+          mostra"</strong> — porque a regra maior sobrescreve a menor. Para
+          esconder só no desktop é o contrário: <code>d-lg-none</code>.
+        </p>
+
+        <div class="alert alert-info mt-4 mb-0 small">
+          <strong>Repare em algo na simulação abaixo:</strong> todo elemento
+          declara também a classe <em>base</em>, sem infixo
+          (<code>d-block d-md-none</code>, e não só <code>d-md-none</code>).
+          Escrever o estado do celular primeiro e depois o do desktop é o
+          próprio jeito mobile-first de pensar — e deixa o código explícito
+          sobre o que acontece em cada faixa.
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra></span>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Área de simulação: uma mini-página -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <div class="palco-janela" data-janela>
+          <div class="palco" data-palco data-bp="xl">
+            <!-- Cabeçalho: vira coluna no celular -->
+            <div class="mini-topo d-flex flex-column flex-md-row justify-content-start justify-content-md-between align-items-stretch align-items-md-center gap-2 mb-3">
+              <span class="mini-marca">MinhaPágina</span>
+
+              <!-- Menu completo só a partir de md -->
+              <nav class="d-none d-md-flex gap-3">
+                <span>Início</span><span>Cursos</span><span>Contato</span>
+              </nav>
+
+              <!-- Hambúrguer: some a partir de md -->
+              <span class="mini-hamburguer d-block d-md-none">☰ Menu</span>
+            </div>
+
+            <div class="d-flex flex-column flex-lg-row gap-3">
+              <!-- Barra lateral: só no lg para cima -->
+              <aside class="mini-lateral d-none d-lg-block">
+                <p class="small mb-2 fw-semibold">Categorias</p>
+                <p class="small mb-1">HTML</p>
+                <p class="small mb-1">CSS</p>
+                <p class="small mb-0">JavaScript</p>
+              </aside>
+
+              <main class="mini-conteudo flex-grow-1">
+                <h3 class="h6 text-center text-lg-start mb-2">
+                  Título do artigo
+                </h3>
+                <p class="small texto-fraco text-center text-lg-start mb-0">
+                  No celular este texto fica centralizado. A partir de 992px ele
+                  se alinha à esquerda.
+                </p>
+              </main>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Legenda: o que está acontecendo agora -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O que cada elemento está fazendo agora</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Elemento</th>
+                <th>Classes</th>
+                <th class="text-end">Agora</th>
+              </tr>
+            </thead>
+            <tbody data-legenda></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./utilitarios.js"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Grid Avançado · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./grid-avancado.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Grid Avançado: soma, offset e order</h1>
+      <p class="texto-fraco mb-0">
+        Por que a linha quebra, como empurrar um bloco e como reordenar sem
+        mexer no HTML.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          Uma <code>.row</code> tem <strong class="text-body">12 colunas</strong>.
+          Enquanto a soma dos filhos couber em 12, todos ficam na mesma linha.
+          Quando passa de 12, o Bootstrap
+          <strong class="text-body">quebra a linha</strong> — não espreme
+          ninguém. É essa conta simples que explica quase todo layout
+          "estranho" que aparece no trabalho de vocês.
+        </p>
+
+        <div class="row g-3 mt-1">
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <h3 class="h6 fw-bold mono">col-N</h3>
+              <p class="texto-fraco small mb-0">
+                Ocupa N das 12 colunas. <code>col-4</code> = um terço.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <h3 class="h6 fw-bold mono">col (sem número)</h3>
+              <p class="texto-fraco small mb-0">
+                Auto-layout: divide o espaço que sobrou igualmente com os outros
+                <code>col</code>. Não ocupa um número fixo de colunas.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <h3 class="h6 fw-bold mono">col-auto</h3>
+              <p class="texto-fraco small mb-0">
+                Ocupa só a largura do próprio conteúdo. Útil para botões e
+                ícones.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4 border-secondary" />
+
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <h3 class="h6 fw-bold mono">offset-N</h3>
+            <p class="texto-fraco small mb-0">
+              Empurra o bloco N colunas para a direita, deixando um buraco. O
+              offset <strong class="text-body">conta na soma</strong>: um
+              <code>col-4 offset-2</code> gasta 6 das 12 colunas. É aí que a
+              linha quebra "sem motivo".
+            </p>
+          </div>
+          <div class="col-12 col-md-6">
+            <h3 class="h6 fw-bold mono">order-N</h3>
+            <p class="texto-fraco small mb-0">
+              Muda a ordem <strong class="text-body">visual</strong> sem tocar
+              no HTML — é flexbox por baixo. O leitor de tela e o Tab continuam
+              seguindo a ordem do código, então use com cuidado.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+          <h2 class="h5 fw-bold mb-0">Mexa nos blocos</h2>
+          <div class="d-flex align-items-center gap-3">
+            <span class="soma" data-soma-texto>Soma: 12 de 12</span>
+            <button type="button" class="btn btn-sm btn-outline-light" data-reiniciar>
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <!-- Os painéis de controle de cada bloco entram aqui -->
+        <div class="row g-3" data-controles></div>
+      </section>
+
+      <!-- Resultado -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <p class="small texto-fraco mb-2">
+          As 12 faixas ao fundo são as colunas do grid. Use-as para conferir a
+          conta.
+        </p>
+
+        <div class="palco-fixo">
+          <!-- fundo com as 12 colunas -->
+          <div class="trilhos" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="row g-2" data-linha></div>
+        </div>
+      </section>
+
+      <!-- HTML gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O HTML que você acabou de montar</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./grid-avancado.js"></script>
+  </body>
+</html>

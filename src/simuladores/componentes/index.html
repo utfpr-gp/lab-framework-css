@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Montador de Componentes · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./componentes.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Montador de Componentes</h1>
+      <p class="texto-fraco mb-0">
+        Ligue e desligue classes e veja o HTML sendo escrito junto com o
+        resultado.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          Componente do Bootstrap não é uma tag mágica: é
+          <strong class="text-body">HTML comum + uma combinação de
+          classes</strong>. E essas classes seguem sempre o mesmo padrão —
+          uma <em>classe base</em> que define o que a coisa é, mais
+          <em>modificadores</em> que mudam cor, tamanho e formato.
+        </p>
+
+        <p class="formula mono text-center my-4">
+          <span class="parte parte--base">btn</span>
+          <span class="parte parte--mod">btn-primary</span>
+          <span class="parte parte--mod">btn-lg</span>
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-6">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--base"></span>
+              <strong class="mono">classe base</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Sem ela nada funciona. <code>btn</code> é o que transforma um
+                <code>&lt;button&gt;</code> ou um <code>&lt;a&gt;</code> em
+                botão do Bootstrap.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--mod"></span>
+              <strong class="mono">modificadores</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Opcionais e combináveis. Quase sempre repetem o nome da base:
+                <code>btn-primary</code>, <code>btn-lg</code>,
+                <code>btn-outline-danger</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="texto-fraco mb-0">
+          As cores não são livres: são os
+          <strong class="text-body">papéis do tema</strong> (primary,
+          secondary, success, danger, warning, info, light, dark). Trocar o
+          valor de <code>$primary</code> no Sass muda todos os componentes que
+          usam esse papel de uma vez.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+          Componente
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-4" data-componentes></div>
+
+        <hr class="border-secondary" />
+
+        <p class="text-uppercase small fw-semibold texto-fraco mb-3 mt-4">
+          Modificadores
+        </p>
+        <div class="row g-4" data-opcoes></div>
+      </section>
+
+      <!-- Resultado -->
+      <div class="row g-4">
+        <div class="col-12 col-lg-6">
+          <section class="painel p-4 h-100">
+            <h2 class="h6 fw-bold mb-3">Resultado</h2>
+            <div class="vitrine" data-vitrine></div>
+          </section>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <section class="painel p-4 h-100">
+            <h2 class="h6 fw-bold mb-3">O HTML correspondente</h2>
+            <pre class="codigo mb-3"><code data-codigo></code></pre>
+            <button type="button" class="btn btn-sm btn-outline-light" data-copiar>
+              Copiar
+            </button>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./componentes.js"></script>
+  </body>
+</html>

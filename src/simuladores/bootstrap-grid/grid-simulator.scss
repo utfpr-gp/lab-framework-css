@@ -3,97 +3,9 @@
 // =============================================================
 
 @use '../../scss/main';
+@use '../../scss/motor';
 @use 'sass:list';
 @use 'sass:math';
-
-// -------------------------------------------------------------
-//  Painel de leitura
-// -------------------------------------------------------------
-.leitura {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.badge-bp {
-  display: inline-grid;
-  place-items: center;
-  min-width: 56px;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: #6366f1;
-  color: #fff;
-  font-weight: 700;
-  font-family: ui-monospace, Consolas, monospace;
-  transition: background-color 0.3s ease;
-}
-
-// -------------------------------------------------------------
-//  Slider e régua de breakpoints
-// -------------------------------------------------------------
-.slider {
-  accent-color: #6366f1;
-}
-
-.regua {
-  position: relative;
-  height: 34px;
-  margin-top: 0.25rem;
-  font-size: 0.7rem;
-
-  span {
-    position: absolute;
-    top: 0;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #94a3b8;
-    white-space: nowrap;
-
-    &::before {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 8px;
-      margin: 0 auto 3px;
-      background: rgba(148, 163, 184, 0.5);
-    }
-
-    &.ativo {
-      color: #a5b4fc;
-      font-weight: 700;
-    }
-  }
-}
-
-// -------------------------------------------------------------
-//  Área de simulação
-// -------------------------------------------------------------
-
-// Janela que recorta o palco quando ele é maior que a tela real
-.palco-janela {
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 12px;
-  background: repeating-linear-gradient(
-    45deg,
-    rgba(148, 163, 184, 0.05) 0 10px,
-    transparent 10px 20px
-  );
-  transition: height 0.3s ease;
-}
-
-// A DIV PAI: a largura dela é controlada pelo JavaScript
-.palco {
-  position: relative; // vira a referência das medidas da animação FLIP
-  flex: 0 0 auto;
-  padding: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 12px;
-  background: #0b1020;
-  transform-origin: top center;
-  transition: width 0.3s ease, transform 0.3s ease;
-}
 
 // Os blocos coloridos
 .bloco {
@@ -120,36 +32,12 @@ $cores: #f87171, #fb923c, #facc15, #a3e635, #34d399, #22d3ee, #60a5fa, #a78bfa,
   }
 }
 
-// -------------------------------------------------------------
-//  Motor de breakpoints simulados
-//
-//  As classes col-* do Bootstrap reagem à largura do NAVEGADOR.
-//  Aqui precisamos que elas reajam à largura do PALCO. Então
-//  reescrevemos as mesmas regras, ativadas pelo atributo
-//  data-bp que o JavaScript coloca no palco.
-//
-//  Para data-bp="lg", por exemplo, valem as regras de xs + sm +
-//  md + lg, nessa ordem — exatamente a cascata mobile-first.
-// -------------------------------------------------------------
-$ordem: xs, sm, md, lg, xl, xxl;
-
-@each $ativo in $ordem {
-  .palco[data-bp='#{$ativo}'] {
-    @for $i from 1 through list.index($ordem, $ativo) {
-      $bp: list.nth($ordem, $i);
-
-      @for $n from 1 through 12 {
-        // no xs a classe não leva sufixo: col-12 (e não col-xs-12)
-        $classe: 'col-#{$bp}-#{$n}';
-        @if $bp == xs {
-          $classe: 'col-#{$n}';
-        }
-
-        .#{$classe} {
-          flex: 0 0 auto;
-          width: math.percentage(math.div($n, 12));
-        }
-      }
+// Reescreve as classes col-* para reagirem à largura do palco
+@include motor.cascata using ($bp) {
+  @for $n from 1 through 12 {
+    .#{motor.classe('col', $bp, $n)} {
+      flex: 0 0 auto;
+      width: math.percentage(math.div($n, 12));
     }
   }
 }

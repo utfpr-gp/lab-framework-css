@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Espaçamento · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./espacamento.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Escala de Espaçamento</h1>
+      <p class="texto-fraco mb-0">
+        O que <code>m-3</code> e <code>py-5</code> realmente valem em pixels — e
+        a diferença entre empurrar por fora e por dentro.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O Bootstrap não deixa você escolher qualquer valor de espaçamento.
+          Ele oferece <strong class="text-body">seis degraus</strong>, de 0 a 5,
+          calculados a partir de uma medida base chamada
+          <code>$spacer</code> (1rem = 16px). Isso é de propósito: com uma
+          escala fechada, a página inteira fica ritmada.
+        </p>
+
+        <p class="formula mono text-center my-4">
+          <span class="parte parte--p">m</span><span class="parte parte--l">t</span>-<span class="parte parte--e">3</span>
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--p"></span><strong class="mono">m</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                A propriedade: <code>m</code> = margin (espaço por
+                <em>fora</em>), <code>p</code> = padding (por <em>dentro</em>).
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--l"></span><strong class="mono">t</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                O lado. Sem letra = todos os lados.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--e"></span><strong class="mono">3</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                O degrau da escala, de 0 a 5. Não é pixel!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="h6 fw-bold mb-2">As letras de lado</h3>
+        <div class="table-responsive mb-4">
+          <table class="table table-sm align-middle mb-0">
+            <tbody>
+              <tr><td class="mono">t</td><td class="texto-fraco">top — só em cima</td></tr>
+              <tr><td class="mono">b</td><td class="texto-fraco">bottom — só embaixo</td></tr>
+              <tr><td class="mono">s</td><td class="texto-fraco">start — só à esquerda (em português)</td></tr>
+              <tr><td class="mono">e</td><td class="texto-fraco">end — só à direita</td></tr>
+              <tr><td class="mono">x</td><td class="texto-fraco">esquerda e direita</td></tr>
+              <tr><td class="mono">y</td><td class="texto-fraco">em cima e embaixo</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="texto-fraco mb-0">
+          Uma observação que vale nota: <code>s</code> e <code>e</code>
+          substituíram <code>l</code> e <code>r</code> no Bootstrap 5 porque
+          existem idiomas que se escrevem da direita para a esquerda. Em
+          português, <code>ms-3</code> empurra pela esquerda.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4">
+          <!-- Propriedade -->
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Propriedade
+            </p>
+            <div class="btn-group w-100" role="group" data-propriedade>
+              <button type="button" class="btn btn-outline-light active" data-valor="m">
+                m · margin
+              </button>
+              <button type="button" class="btn btn-outline-light" data-valor="p">
+                p · padding
+              </button>
+            </div>
+          </div>
+
+          <!-- Lado -->
+          <div class="col-12 col-lg-8">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Lado
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-lado>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="">
+                todos
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="t">t</button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="b">b</button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="s">s</button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="e">e</button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="x">x</button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="y">y</button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4 border-secondary" />
+
+        <div class="row g-4 align-items-center">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Classe resultante
+            </p>
+            <p class="leitura mono mb-0" data-classe aria-live="polite">m-3</p>
+            <p class="texto-fraco mb-0 mt-2">
+              <span class="mono" data-valor-rem>1rem</span> =
+              <span class="mono fw-semibold" data-valor-px>16px</span>
+            </p>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="degrau" class="text-uppercase small fw-semibold texto-fraco">
+              Degrau da escala
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="degrau"
+              min="0"
+              max="5"
+              step="1"
+              value="3"
+            />
+            <div class="escala" data-escala aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Resultado visual -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <p class="small texto-fraco mb-3">
+          A borda tracejada é o elemento-pai. O bloco roxo é o seu elemento; o
+          bloco claro dentro dele é o conteúdo.
+        </p>
+
+        <div class="demo-pai">
+          <div class="demo-elemento" data-elemento>
+            <div class="demo-conteudo">conteúdo</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabela da escala -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">A escala inteira</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Degrau</th>
+                <th>Cálculo</th>
+                <th>rem</th>
+                <th>pixels</th>
+              </tr>
+            </thead>
+            <tbody data-tabela></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./espacamento.js"></script>
+  </body>
+</html>
