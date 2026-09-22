@@ -52,6 +52,19 @@
   transition: all 0.3s ease-in-out;
 }
 
+// O palco vira uma "tela" com altura, para a gaveta do offcanvas
+// ter por onde deslizar e o que cobrir
+.palco--pagina {
+  min-height: 300px;
+}
+
+.miolo {
+  padding: 1rem;
+  margin-top: 0.75rem;
+  border-radius: 10px;
+  background: #131c33;
+}
+
 // -------------------------------------------------------------
 //  Motor: a expansão da navbar reagindo à largura do palco
 //
@@ -110,6 +123,136 @@
       .navbar-nav {
         flex-direction: row !important;
       }
+    }
+  }
+}
+
+// -------------------------------------------------------------
+//  Motor: o offcanvas responsivo reagindo à largura do palco
+//
+//  Aqui a direção se inverte em relação a tudo no laboratório. O
+//  Bootstrap escreve as regras de gaveta dentro de um
+//  @media (max-width), não min-width: .offcanvas-lg é gaveta
+//  ABAIXO de lg e conteúdo normal a partir de lg.
+//
+//  Na cascata isso vira: no nível xs todos os .offcanvas-* viram
+//  gaveta; depois, a cada nível alcançado, aquele breakpoint
+//  específico volta a ser conteúdo normal. Como o segundo bloco vem
+//  depois, ele vence — e o resultado é idêntico ao do Bootstrap.
+//
+//  Só a variante offcanvas-end está replicada, que é a usada aqui.
+// -------------------------------------------------------------
+@include motor.cascata using ($bp) {
+  @if $bp == xs {
+    // Modo gaveta, para todos os breakpoints
+    .offcanvas-sm,
+    .offcanvas-md,
+    .offcanvas-lg,
+    .offcanvas-xl,
+    .offcanvas-xxl {
+      position: fixed;
+      bottom: 0;
+      z-index: 1045;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      visibility: hidden;
+      // !important porque o Bootstrap zera este fundo na faixa em
+      // que a gaveta vira conteúdo normal
+      background-color: var(--bs-offcanvas-bg, #212529) !important;
+      background-clip: padding-box;
+      outline: 0;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .offcanvas-sm.offcanvas-end,
+    .offcanvas-md.offcanvas-end,
+    .offcanvas-lg.offcanvas-end,
+    .offcanvas-xl.offcanvas-end,
+    .offcanvas-xxl.offcanvas-end {
+      top: 0;
+      right: 0;
+      left: auto;
+      width: var(--bs-offcanvas-width, 280px);
+      border-left: 1px solid rgba(148, 163, 184, 0.3);
+      transform: translateX(100%);
+    }
+
+    // aberta: a classe .show entra pelo JavaScript do Bootstrap
+    .offcanvas-sm.showing, .offcanvas-sm.show:not(.hiding),
+    .offcanvas-md.showing, .offcanvas-md.show:not(.hiding),
+    .offcanvas-lg.showing, .offcanvas-lg.show:not(.hiding),
+    .offcanvas-xl.showing, .offcanvas-xl.show:not(.hiding),
+    .offcanvas-xxl.showing, .offcanvas-xxl.show:not(.hiding) {
+      transform: none;
+    }
+
+    .offcanvas-sm.showing, .offcanvas-sm.hiding, .offcanvas-sm.show,
+    .offcanvas-md.showing, .offcanvas-md.hiding, .offcanvas-md.show,
+    .offcanvas-lg.showing, .offcanvas-lg.hiding, .offcanvas-lg.show,
+    .offcanvas-xl.showing, .offcanvas-xl.hiding, .offcanvas-xl.show,
+    .offcanvas-xxl.showing, .offcanvas-xxl.hiding, .offcanvas-xxl.show {
+      visibility: visible;
+    }
+
+    // O cabeçalho com o botão de fechar precisa voltar: o Bootstrap
+    // o esconde na faixa em que a gaveta vira conteúdo normal, e o
+    // navegador de verdade quase sempre está nessa faixa. Sem isto a
+    // gaveta abre e não tem como fechar.
+    .offcanvas-sm .offcanvas-header,
+    .offcanvas-md .offcanvas-header,
+    .offcanvas-lg .offcanvas-header,
+    .offcanvas-xl .offcanvas-header,
+    .offcanvas-xxl .offcanvas-header {
+      display: flex;
+    }
+
+    .offcanvas-sm .offcanvas-body,
+    .offcanvas-md .offcanvas-body,
+    .offcanvas-lg .offcanvas-body,
+    .offcanvas-xl .offcanvas-body,
+    .offcanvas-xxl .offcanvas-body {
+      display: block;
+      flex-grow: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background-color: transparent !important;
+    }
+  } @else {
+    // Modo conteúdo normal, deste breakpoint para cima.
+    //
+    // No Bootstrap as duas metades vivem em media queries que nunca
+    // coincidem, então não precisam se desfazer. Aqui elas convivem,
+    // e por isso cada propriedade da gaveta precisa ser desfeita na
+    // mão — e com a mesma quantidade de classes no seletor, senão a
+    // regra de duas classes lá de cima venceria por especificidade.
+    .offcanvas-#{$bp},
+    .offcanvas-#{$bp}.offcanvas-end {
+      position: static;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+      z-index: auto;
+      flex-direction: row;
+      width: auto;
+      max-width: none;
+      visibility: visible;
+      border: 0;
+      transform: none;
+      background-color: transparent !important;
+    }
+
+    .offcanvas-#{$bp} .offcanvas-header {
+      display: none;
+    }
+
+    .offcanvas-#{$bp} .offcanvas-body {
+      display: flex;
+      flex-grow: 0;
+      padding: 0;
+      overflow-y: visible;
+      background-color: transparent !important;
     }
   }
 }

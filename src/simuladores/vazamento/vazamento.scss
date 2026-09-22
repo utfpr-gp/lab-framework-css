@@ -1,0 +1,190 @@
+// =============================================================
+//  Estilos do Simulador de Vazamento Horizontal
+// =============================================================
+
+@use '../../scss/main';
+@use '../../scss/motor';
+
+// A página dentro do palco: é ela que representa o container do site
+.pagina {
+  padding: 1rem;
+  border-radius: 10px;
+  background: #131c33;
+  // A barra de rolagem lateral aparecendo aqui dentro É o sintoma
+  // que o simulador quer mostrar. Esconder com overflow: hidden
+  // seria repetir justamente o erro explicado lá em cima.
+  overflow-x: auto;
+}
+
+// -------------------------------------------------------------
+//  As causas
+// -------------------------------------------------------------
+
+// 1. Largura fixa em px — o clássico
+.caixa-fixa {
+  width: 900px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.35);
+  border: 1px solid #6366f1;
+  font-size: 0.82rem;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+// a correção: deixa encolher quando a tela é menor
+.corrigido .caixa-fixa {
+  max-width: 100%;
+}
+
+// 2. Palavra longa sem quebra (URL, e-mail, código)
+.alvo-palavra {
+  color: #94a3b8;
+}
+
+// a correção é a classe text-break do Bootstrap, aplicada pelo JS
+
+// 3. Imagem sem img-fluid — a correção também é classe, via JS
+
+// 4. Tabela larga — a correção é envolver em .table-responsive, via JS
+[data-envolve-tabela] table {
+  min-width: 620px;
+}
+
+// 5. 100vw dentro de um pai com padding
+//
+//    vw conta a largura da janela INTEIRA, inclusive a barra de
+//    rolagem, e ignora o padding do pai. Aqui --tela guarda a
+//    largura simulada para o mesmo efeito acontecer no palco.
+.caixa-viewport {
+  width: var(--tela, 100%);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 8px;
+  background: rgba(244, 114, 182, 0.3);
+  border: 1px solid #f472b6;
+  font-size: 0.82rem;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+.corrigido .caixa-viewport {
+  width: 100%;
+}
+
+// -------------------------------------------------------------
+//  Marcação do culpado
+// -------------------------------------------------------------
+.vazando {
+  outline: 2px solid #f87171;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+// -------------------------------------------------------------
+//  Painel de causas
+// -------------------------------------------------------------
+.causa {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: #131c33;
+  color: #e8ecf6;
+  text-align: left;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+
+  &:hover {
+    border-color: rgba(99, 102, 241, 0.6);
+  }
+
+  &.ligada {
+    border-color: #f87171;
+    background: rgba(248, 113, 113, 0.1);
+  }
+
+  &.ligada.corrigida {
+    border-color: #34d399;
+    background: rgba(52, 211, 153, 0.1);
+  }
+}
+
+.causa__marca {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border-radius: 5px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.causa.ligada .causa__marca {
+  background: #f87171;
+  border-color: #f87171;
+  color: #0b1020;
+}
+
+.causa.ligada.corrigida .causa__marca {
+  background: #34d399;
+  border-color: #34d399;
+}
+
+.causa__nome {
+  font-weight: 600;
+  font-size: 0.88rem;
+}
+
+.causa__fix {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.15rem;
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+// -------------------------------------------------------------
+//  Diagnóstico
+// -------------------------------------------------------------
+.veredito {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+
+  &--ok {
+    background: rgba(52, 211, 153, 0.14);
+    border-color: #34d399;
+    color: #6ee7b7;
+  }
+
+  &--vazou {
+    background: rgba(248, 113, 113, 0.14);
+    border-color: #f87171;
+    color: #fca5a5;
+  }
+}
+
+.culpado {
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  background: #0b1020;
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+
+  strong {
+    color: #fca5a5;
+  }
+}
+
+// As colunas do grid reagindo à largura do palco
+@include motor.colunas;

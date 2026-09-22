@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Sticky Footer · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./sticky-footer.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Sticky Footer</h1>
+      <p class="texto-fraco mb-0">
+        O rodapé que fica no fim da tela quando o conteúdo é curto — e desce
+        junto com a rolagem quando é longo.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          O problema só aparece quando a página tem
+          <strong class="text-body">pouco conteúdo</strong>. Com muito texto o
+          rodapé cai naturalmente lá embaixo e tudo parece certo — por isso o
+          bug passa despercebido até alguém abrir uma página vazia e ver o
+          rodapé boiando no meio da tela, com um vão branco embaixo.
+        </p>
+
+        <div class="alert alert-info small">
+          <strong>Sticky footer não é rodapé fixo.</strong> Rodapé fixo
+          (<code>fixed-bottom</code>) fica grudado na janela e
+          <em>cobre</em> o conteúdo quando você rola. Sticky footer fica no fim
+          do <em>documento</em>: se o conteúdo for curto ele encosta no fim da
+          tela, se for longo ele espera você rolar até lá. É quase sempre o
+          sticky que você quer.
+        </div>
+
+        <h3 class="h6 fw-bold mb-2 mt-4">As três peças</h3>
+        <p class="texto-fraco">
+          A solução moderna não é um truque: é flexbox fazendo o trabalho dele.
+          São três classes cooperando, e cada uma tem um papel distinto.
+        </p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--a"></span>
+              <strong class="mono">min-vh-100</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Garante que o invólucro tenha <em>pelo menos</em> a altura da
+                tela. Sem isso não existe espaço sobrando para empurrar nada —
+                a página simplesmente acaba onde o conteúdo acaba.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--b"></span>
+              <strong class="mono">d-flex flex-column</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                Transforma o invólucro em coluna flex. Agora header, main e
+                footer são itens de um eixo vertical — e itens flex podem ser
+                esticados e empurrados.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="painel p-3 h-100">
+              <span class="ponto ponto--c"></span>
+              <strong class="mono">flex-grow-1</strong>
+              <span class="texto-fraco small">ou</span>
+              <strong class="mono">mt-auto</strong>
+              <p class="texto-fraco small mb-0 mt-1">
+                O empurrão. Ou o <code>main</code> cresce e ocupa a sobra, ou o
+                <code>footer</code> ganha margem automática que consome a
+                sobra. Dois caminhos, o mesmo destino.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="texto-fraco mb-0">
+          Repare que <code>min-vh-100</code> sozinho
+          <strong class="text-body">não resolve</strong> — ele só cria o espaço
+          vazio. É por isso que tanta gente copia essa classe da internet,
+          acha que arrumou, e o rodapé continua boiando. Desligue uma peça de
+          cada vez abaixo e veja qual faz o quê.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 mb-4">
+          <div class="col-12 col-md-6">
+            <label for="conteudo" class="text-uppercase small fw-semibold texto-fraco d-block mb-2">
+              Quantidade de conteúdo ·
+              <span class="mono text-body" data-qtd>1 parágrafo</span>
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="conteudo"
+              min="0"
+              max="8"
+              step="1"
+              value="1"
+            />
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label for="altura" class="text-uppercase small fw-semibold texto-fraco d-block mb-2">
+              Altura da tela ·
+              <span class="mono text-body" data-altura-tela>420px</span>
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="altura"
+              min="260"
+              max="560"
+              step="10"
+              value="420"
+            />
+          </div>
+        </div>
+
+        <hr class="border-secondary" />
+
+        <div class="row g-4 mt-1">
+          <div class="col-12 col-lg-7">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Peças ligadas no invólucro
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-pecas>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-peca="altura">
+                min-vh-100
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-peca="coluna">
+                d-flex flex-column
+              </button>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-5">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              O empurrão
+            </p>
+            <div class="d-flex flex-wrap gap-2" data-empurrao>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="nenhum">
+                nenhum
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light active" data-valor="grow">
+                flex-grow-1 no main
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="auto">
+                mt-auto no footer
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-light" data-valor="fixo">
+                fixed-bottom ✗
+              </button>
+            </div>
+
+            <p class="explicacao mt-3 mb-0" data-explicacao></p>
+          </div>
+        </div>
+
+        <p class="mb-0 mt-4" data-veredito></p>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+          <div class="d-flex align-items-center gap-2">
+            <span class="lab-dot"></span>
+            <span class="mono small texto-fraco">a tela do usuário</span>
+          </div>
+          <span class="small texto-fraco">
+            bloco claro = <code>&lt;main&gt;</code> · roxo =
+            <code>&lt;footer&gt;</code> · hachurado = espaço vazio
+          </span>
+        </div>
+
+        <!-- A "tela": altura controlada pelo JS. O que passar disso
+             exige rolagem, igual numa janela de navegador de verdade. -->
+        <div class="tela" data-tela>
+          <div class="pagina" data-pagina>
+            <header class="pagina__topo">MinhaPágina</header>
+
+            <main class="pagina__main" data-main>
+              <h3 class="h6 mb-2">Título do artigo</h3>
+              <div data-paragrafos></div>
+            </main>
+
+            <footer class="pagina__rodape" data-rodape>
+              © 2026 — Rodapé do site
+            </footer>
+          </div>
+        </div>
+      </section>
+
+      <!-- Código gerado -->
+      <section class="painel p-4">
+        <h2 class="h6 fw-bold mb-3">O HTML que você acabou de montar</h2>
+        <pre class="codigo mb-0"><code data-codigo></code></pre>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./sticky-footer.js"></script>
+  </body>
+</html>

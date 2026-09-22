@@ -28,6 +28,8 @@ export default defineConfig({
         gutters: pagina('gutters'),
         cores: pagina('cores'),
         formulario: pagina('formulario'),
+        'sticky-footer': pagina('sticky-footer'),
+        vazamento: pagina('vazamento'),
       },
     },
   },

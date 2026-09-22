@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Vazamento Horizontal · Bootstrap 5</title>
+    <link rel="icon" type="image/svg+xml" href="../../../favicon.svg" />
+    <link rel="stylesheet" href="./vazamento.scss" />
+  </head>
+
+  <body>
+    <header class="container pt-4 pb-3">
+      <a href="../../../index.html" class="btn btn-sm btn-outline-light mb-4">
+        ← Voltar
+      </a>
+      <h1 class="h2 fw-bold mb-2">Vazamento Horizontal</h1>
+      <p class="texto-fraco mb-0">
+        Aquela barra de rolagem lateral que aparece só no celular — quem a
+        causou, e como achar o culpado.
+      </p>
+    </header>
+
+    <main class="container pb-5">
+      <!-- ================================================== -->
+      <!--  1. EXPLICAÇÃO DIDÁTICA                            -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h5 fw-bold mb-3">O conceito</h2>
+
+        <p class="texto-fraco">
+          É o bug mais comum de layout responsivo: no seu monitor está tudo
+          perfeito, mas no celular aparece uma barra de rolagem horizontal e a
+          página inteira "balança" para os lados. O motivo é sempre o mesmo —
+          <strong class="text-body">algum elemento é mais largo que a tela</strong>.
+        </p>
+
+        <p class="texto-fraco">
+          O que muda é o culpado. E ele costuma ser invisível: o elemento que
+          vaza quase nunca é o que você vê estourando a borda, porque o pai
+          dele pode estar escondendo a bagunça.
+        </p>
+
+        <div class="alert alert-danger small">
+          <strong>A solução que não é solução:</strong> jogar
+          <code>overflow-x: hidden</code> no <code>body</code>. Isso não
+          conserta nada, só esconde — o elemento largo continua lá, empurrando
+          o layout, e de quebra você perde a rolagem em qualquer coisa que
+          precisasse dela. É curativo em cima de fratura. Ache o culpado.
+        </div>
+
+        <h3 class="h6 fw-bold mb-2 mt-4">Como um profissional acha o culpado</h3>
+        <p class="texto-fraco mb-0">
+          A técnica é comparar, elemento por elemento, a borda direita dele com
+          a borda direita do container. Quem passar, é o responsável. É
+          exatamente isso que o simulador faz abaixo, e é o mesmo raciocínio que
+          você repete no DevTools quando estiver sozinho com o problema.
+        </p>
+      </section>
+
+      <!-- ================================================== -->
+      <!--  2. SIMULAÇÃO                                      -->
+      <!-- ================================================== -->
+      <section class="painel p-4 mb-4">
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-12 col-lg-4">
+            <p class="text-uppercase small fw-semibold texto-fraco mb-2">
+              Largura da tela
+            </p>
+            <div class="d-flex align-items-baseline gap-2 mb-3">
+              <span class="leitura mono" data-largura aria-live="polite">1200</span>
+              <span class="fs-4 texto-fraco">px</span>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+              <span class="badge-bp" data-bp-sigla>xl</span>
+              <span class="texto-fraco small" data-bp-regra></span>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <label for="largura" class="visually-hidden">
+              Largura da tela simulada, de 320 a 1600 pixels
+            </label>
+            <input
+              type="range"
+              class="form-range slider"
+              id="largura"
+              min="320"
+              max="1600"
+              step="1"
+              value="1200"
+            />
+            <div class="regua" data-regua aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <hr class="border-secondary" />
+
+        <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4 mb-3">
+          <p class="text-uppercase small fw-semibold texto-fraco mb-0">
+            Causas de vazamento
+          </p>
+          <button type="button" class="btn btn-sm btn-success" data-corrigir>
+            Aplicar as correções
+          </button>
+        </div>
+
+        <div class="row g-2" data-causas></div>
+      </section>
+
+      <!-- Diagnóstico -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h6 fw-bold mb-3">Diagnóstico</h2>
+        <p class="mb-3" data-veredito></p>
+        <div data-culpados></div>
+      </section>
+
+      <!-- Área de simulação -->
+      <section class="painel p-3 p-lg-4 mb-4">
+        <p class="small texto-fraco mb-3">
+          A borda vermelha marca quem está passando da largura da tela.
+        </p>
+
+        <div class="palco-janela" data-janela>
+          <div class="palco" data-palco data-bp="xl">
+            <div class="pagina" data-pagina>
+              <h3 class="h6 mb-3">Notícias do curso</h3>
+
+              <p class="small texto-fraco">
+                Um parágrafo comum, que se comporta bem em qualquer largura
+                porque o texto quebra sozinho.
+              </p>
+
+              <!-- Cada bloco abaixo é uma causa que o aluno liga -->
+              <div data-bloco="fixa" hidden>
+                <div class="caixa-fixa">largura fixa: 900px</div>
+              </div>
+
+              <div data-bloco="palavra" hidden>
+                <p class="small alvo-palavra">
+                  Link do material:
+                  https://exemplo.utfpr.edu.br/disciplinas/desenvolvimento-web/material-complementar-bootstrap-2026.pdf
+                </p>
+              </div>
+
+              <div data-bloco="imagem" hidden>
+                <img data-imagem alt="Imagem de exemplo com 1200 pixels de largura" />
+              </div>
+
+              <div data-bloco="tabela" hidden>
+                <div data-envolve-tabela>
+                  <table class="table table-sm table-dark mb-0">
+                    <thead>
+                      <tr>
+                        <th>Matrícula</th><th>Nome completo</th><th>Curso</th>
+                        <th>Disciplina</th><th>Situação</th><th>Frequência</th><th>Nota final</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2026001</td><td>Maria Aparecida da Silva</td><td>Engenharia de Software</td>
+                        <td>Desenvolvimento Web</td><td>Aprovada</td><td>92%</td><td>8,7</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div data-bloco="viewport" hidden>
+                <div class="caixa-viewport">largura de 100vw dentro de um pai com padding</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container py-4 border-top border-secondary-subtle">
+      <p class="small texto-fraco mb-0">Portal de Simuladores Web · v1.0</p>
+    </footer>
+
+    <script type="module" src="./vazamento.js"></script>
+  </body>
+</html>

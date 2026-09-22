@@ -65,6 +65,25 @@ export function animarMudanca(elementos, mudar) {
 }
 
 /**
+ * Adia uma medição até o layout parar de se mexer.
+ *
+ * As transições do laboratório duram de 0.3s a 0.4s, e durante esse
+ * tempo getBoundingClientRect devolve a posição do meio da animação.
+ * Medir cedo demais produz diagnóstico errado — normalmente com a
+ * cara de "o aviso está uma jogada atrasado".
+ *
+ * Também serve de freio para o slider, que dispara dezenas de
+ * eventos por segundo enquanto o aluno arrasta.
+ */
+export function aposAcalmar(fn, espera = 450) {
+  let id;
+  return (...args) => {
+    clearTimeout(id);
+    id = setTimeout(() => fn(...args), espera);
+  };
+}
+
+/**
  * Liga o slider de largura ao palco.
  *
  * @param {object} opcoes
@@ -96,7 +115,13 @@ export function criarPalco({
   /** Encaixa o palco na tela real quando ele é maior. */
   function ajustarZoom(largura) {
     const escala = Math.min(1, janela.clientWidth / largura);
-    palco.style.transform = escala < 1 ? `scale(${escala})` : '';
+
+    // O scale fica aplicado mesmo valendo 1. Além de ser inofensivo
+    // (scale(1) não muda nada visualmente), um elemento transformado
+    // vira o bloco de contenção dos filhos com position: fixed — é o
+    // que mantém um offcanvas preso ao palco em vez de cobrir a
+    // página inteira do laboratório.
+    palco.style.transform = `scale(${escala})`;
     janela.style.height = `${palco.offsetHeight * escala}px`;
     return escala;
   }

@@ -134,6 +134,18 @@
           </button>
         </div>
 
+        <p class="text-uppercase small fw-semibold texto-fraco mb-2 mt-4">
+          Como o menu se esconde
+        </p>
+        <div class="d-flex flex-wrap gap-2" data-tipo>
+          <button type="button" class="btn btn-sm btn-outline-light active" data-valor="collapse">
+            collapse · empurra para baixo
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-light" data-valor="offcanvas">
+            offcanvas · gaveta lateral
+          </button>
+        </div>
+
         <p class="mt-3 mb-0" data-veredito></p>
       </section>
 
@@ -144,37 +156,51 @@
         </p>
 
         <div class="palco-janela" data-janela>
-          <div class="palco" data-palco data-bp="xl">
-            <nav class="navbar navbar-expand-lg bg-dark rounded" data-navbar>
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">MinhaPágina</a>
+          <div class="palco palco--pagina" data-palco data-bp="xl">
+            <!-- A navbar é remontada pelo JS conforme o tipo de menu -->
+            <div data-navbar-wrapper></div>
 
-                <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#menu"
-                  aria-controls="menu"
-                  aria-expanded="false"
-                  aria-label="Abrir menu"
-                >
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="menu">
-                  <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#">Início</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
-                  </ul>
-                  <a class="btn btn-primary btn-sm" href="#">Entrar</a>
-                </div>
-              </div>
-            </nav>
+            <div class="miolo">
+              <h3 class="h6 mb-2">Conteúdo da página</h3>
+              <p class="small texto-fraco mb-0">
+                Está aqui só para dar altura à tela — é sobre ele que a gaveta
+                do offcanvas passa por cima.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Comparação -->
+      <section class="painel p-4 mb-4">
+        <h2 class="h6 fw-bold mb-3">Collapse ou offcanvas?</h2>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle mb-0">
+            <thead>
+              <tr>
+                <th></th>
+                <th><code>collapse</code></th>
+                <th><code>offcanvas</code></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="texto-fraco">Como aparece</td>
+                <td class="texto-fraco">Desce e empurra o conteúdo para baixo</td>
+                <td class="texto-fraco">Desliza por cima, como uma gaveta</td>
+              </tr>
+              <tr>
+                <td class="texto-fraco">Classe responsiva</td>
+                <td class="mono texto-fraco">— (basta o navbar-expand-*)</td>
+                <td class="mono texto-fraco">offcanvas-lg, casada com o expand</td>
+              </tr>
+              <tr>
+                <td class="texto-fraco">Boa para</td>
+                <td class="texto-fraco">Menus curtos, 3 ou 4 links</td>
+                <td class="texto-fraco">Menus longos, com seções e busca</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
