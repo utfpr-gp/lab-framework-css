@@ -8,36 +8,78 @@
 import './vazamento.scss';
 import { criarPalco, aposAcalmar } from '../../js/motor.js';
 
+/**
+ * Cada causa traz o trecho que a provoca e o trecho que a resolve.
+ *
+ * `linguagem` diz se o conserto é no HTML ou no CSS — a distinção
+ * importa: metade delas se resolve trocando uma classe, a outra
+ * metade só mexendo na folha de estilo.
+ */
 const CAUSAS = [
   {
     id: 'fixa',
     nome: 'Largura fixa em pixels',
     detalhe: 'width: 900px',
     correcao: 'max-width: 100% (ou usar col-*)',
+    linguagem: 'CSS',
+    errado: '.banner {\n  width: 900px;\n}',
+    certo: '.banner {\n  width: 900px;\n  max-width: 100%;  /* pode encolher */\n}',
+    nota:
+      'max-width vence width quando a tela é menor. Em layout de grid, ' +
+      'o ideal é nem usar px: col-12 col-md-6 já resolve.',
   },
   {
     id: 'palavra',
     nome: 'Palavra longa sem quebra',
     detalhe: 'uma URL gigante num parágrafo',
     correcao: 'classe .text-break',
+    linguagem: 'HTML',
+    errado: '<p>Link: https://exemplo.utfpr.edu.br/...</p>',
+    certo: '<p class="text-break">Link: https://exemplo.utfpr.edu.br/...</p>',
+    nota:
+      'O navegador não quebra no meio de uma palavra sem permissão. ' +
+      '.text-break é overflow-wrap: break-word. Vale para URLs, e-mails ' +
+      'e códigos de matrícula.',
   },
   {
     id: 'imagem',
     nome: 'Imagem sem img-fluid',
     detalhe: 'imagem de 1200px de largura',
     correcao: 'classe .img-fluid',
+    linguagem: 'HTML',
+    errado: '<img src="foto.jpg" alt="Foto do evento">',
+    certo: '<img src="foto.jpg" alt="Foto do evento" class="img-fluid">',
+    nota:
+      '.img-fluid é max-width: 100% + height: auto. Sem ela a imagem ' +
+      'usa o tamanho original do arquivo, que costuma ser bem maior que ' +
+      'a tela de um celular.',
   },
   {
     id: 'tabela',
     nome: 'Tabela larga solta',
     detalhe: '7 colunas num celular',
     correcao: 'envolver em .table-responsive',
+    linguagem: 'HTML',
+    errado: '<table class="table">\n  ...\n</table>',
+    certo:
+      '<div class="table-responsive">\n  <table class="table">\n    ...\n  </table>\n</div>',
+    nota:
+      'A tabela continua larga — quem passa a rolar é o invólucro, não ' +
+      'a página. É a solução certa: tabela espremida em celular fica ' +
+      'ilegível de qualquer jeito.',
   },
   {
     id: 'viewport',
     nome: '100vw dentro de pai com padding',
     detalhe: 'vw ignora o padding do pai',
     correcao: 'usar width: 100% em vez de 100vw',
+    linguagem: 'CSS',
+    errado: '.faixa {\n  width: 100vw;\n}',
+    certo: '.faixa {\n  width: 100%;\n}',
+    nota:
+      '100vw é a largura da janela inteira, incluindo a barra de rolagem ' +
+      'e ignorando o padding do pai. 100% é a largura que o pai realmente ' +
+      'oferece — quase sempre é isso que você queria.',
   },
 ];
 
@@ -59,6 +101,7 @@ const painelCausas = document.querySelector('[data-causas]');
 const veredito = document.querySelector('[data-veredito]');
 const listaCulpados = document.querySelector('[data-culpados]');
 const botaoCorrigir = document.querySelector('[data-corrigir]');
+const codigo = document.querySelector('[data-codigo]');
 
 document.querySelector('[data-imagem]').src = IMAGEM;
 
@@ -174,6 +217,43 @@ function acharCulpados() {
   return culpados;
 }
 
+// -------------------------------------------------------------
+//  O código de cada causa ligada
+// -------------------------------------------------------------
+function escapar(texto) {
+  return texto
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function montarCodigo() {
+  const ativas = CAUSAS.filter((c) => ligadas.has(c.id));
+
+  if (!ativas.length) {
+    codigo.innerHTML =
+      '<p class="small texto-fraco mb-0">Ligue uma causa acima para ver o código dela.</p>';
+    return;
+  }
+
+  codigo.innerHTML = ativas
+    .map(
+      (c) => `
+      <div class="trecho">
+        <div class="trecho__topo">
+          <span class="trecho__nome">${c.nome}</span>
+          <span class="trecho__ling">${c.linguagem}</span>
+        </div>
+
+        <pre class="codigo codigo--errado ${corrigir ? 'apagado' : 'valendo'}"><code>${escapar(c.errado)}</code></pre>
+        <pre class="codigo codigo--certo ${corrigir ? 'valendo' : 'apagado'}"><code>${escapar(c.certo)}</code></pre>
+
+        <p class="trecho__nota">${c.nota}</p>
+      </div>`
+    )
+    .join('');
+}
+
 /** Um nome curto e legível para o elemento, como no DevTools. */
 function identificar(el) {
   const tag = el.tagName.toLowerCase();
@@ -202,6 +282,7 @@ function atualizar({ largura } = {}) {
       ligada && corrigir ? `corrigido com ${c.correcao}` : c.detalhe;
   });
 
+  montarCodigo();
   diagnosticarDepois();
 }
 

@@ -188,3 +188,100 @@
 
 // As colunas do grid reagindo à largura do palco
 @include motor.colunas;
+
+// -------------------------------------------------------------
+//  Código de cada causa
+// -------------------------------------------------------------
+.trecho {
+  padding: 0.9rem;
+  margin-bottom: 0.85rem;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #0f1730;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.trecho__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.trecho__nome {
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+.trecho__ling {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  color: #94a3b8;
+}
+
+.codigo {
+  position: relative;
+  margin: 0 0 0.4rem;
+  padding: 0.6rem 0.8rem 0.6rem 2rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  transition: opacity 0.25s ease;
+
+  // o ✗ e o ✓ na margem, como num diff
+  &::before {
+    position: absolute;
+    left: 0.7rem;
+    font-weight: 700;
+  }
+}
+
+.codigo--errado {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.35);
+  color: #fca5a5;
+
+  &::before {
+    content: '✗';
+    color: #f87171;
+  }
+}
+
+.codigo--certo {
+  background: rgba(52, 211, 153, 0.1);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #6ee7b7;
+
+  &::before {
+    content: '✓';
+    color: #34d399;
+  }
+}
+
+// só um dos dois está valendo por vez
+.codigo.apagado {
+  opacity: 0.35;
+}
+
+.codigo.valendo {
+  opacity: 1;
+}
+
+.trecho__nota {
+  margin: 0.6rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #94a3b8;
+}
