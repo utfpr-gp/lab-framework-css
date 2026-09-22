@@ -52,6 +52,19 @@
           que o resto da página não tem, e nada alinharia.
         </p>
 
+        <div class="alert alert-secondary small">
+          <strong>Os dois eixos não funcionam igual.</strong> O que está escrito
+          acima vale para o gutter <em>horizontal</em>. O vertical é feito de
+          outro jeito: <code>margin-top</code> em cada coluna — o valor inteiro,
+          não a metade — mais um <code>margin-top</code> negativo na
+          <code>.row</code> para cancelar o da primeira fileira. E tem outra
+          diferença que pega muita gente:
+          <strong>o gutter vertical vem desligado de fábrica</strong>
+          (<code>--bs-gutter-y: 0</code>), enquanto o horizontal já vem com
+          1.5rem. É por isso que duas fileiras de cards nascem grudadas até
+          você pedir <code>g-3</code> ou <code>gy-3</code>.
+        </div>
+
         <div class="alert alert-warning small mb-0">
           <strong>A consequência prática:</strong> se você pintar o fundo
           direto na <code>.col</code>, o fundo ocupa também a área do padding —
@@ -112,6 +125,8 @@
                 gy · vertical
               </button>
             </div>
+
+            <p class="explicacao mt-3 mb-0" data-explicacao></p>
           </div>
 
           <div class="col-12 col-md-6">

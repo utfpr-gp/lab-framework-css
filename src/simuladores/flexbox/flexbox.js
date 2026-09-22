@@ -48,6 +48,35 @@ const OPCOES = [
   },
 ];
 
+
+/**
+ * O que cada valor faz, em português.
+ *
+ * Os nomes do flexbox são muito parecidos entre si — between, around
+ * e evenly distribuem espaço de três jeitos diferentes, e ninguém
+ * adivinha qual é qual só pelo nome. Este mapa é lido ao vivo
+ * conforme o aluno escolhe.
+ */
+const EXPLICACAO = {
+  'flex-row': 'Eixo principal na horizontal. justify-content mexe na horizontal, align-items na vertical.',
+  'flex-column': 'Eixo principal na vertical. Os dois trocam de papel: agora justify-content mexe na vertical.',
+
+  'justify-content-start': 'Tudo encostado no começo do eixo. É o padrão — sobra espaço depois do último item.',
+  'justify-content-center': 'Tudo junto no meio, com o espaço livre dividido igualmente nas duas pontas.',
+  'justify-content-end': 'Tudo encostado no fim do eixo. O espaço livre fica todo antes do primeiro item.',
+  'justify-content-between': 'Primeiro colado no começo, último colado no fim, e a sobra dividida ENTRE os itens. Não há espaço nas pontas.',
+  'justify-content-around': 'Cada item ganha o mesmo espaço em volta. Como os espaços internos se somam aos pares, o vão do meio fica o dobro do das pontas.',
+  'justify-content-evenly': 'Todos os vãos iguais, inclusive os das pontas. É o "around" sem a pegadinha da soma.',
+
+  'align-items-stretch': 'Padrão: os itens esticam para ocupar toda a medida do eixo cruzado. É por isso que caixas sem altura definida ficam todas do mesmo tamanho.',
+  'align-items-start': 'Os itens encostam no começo do eixo cruzado e mantêm o tamanho natural.',
+  'align-items-center': 'Os itens ficam centralizados no eixo cruzado, cada um com o próprio tamanho.',
+  'align-items-end': 'Os itens encostam no fim do eixo cruzado.',
+
+  'flex-nowrap': 'Padrão: os itens NUNCA pulam de linha. Se não couberem, eles espremem ou vazam para fora da caixa.',
+  'flex-wrap': 'Os itens que não couberem pulam para a próxima faixa. Cuidado: justify-content é aplicado a cada faixa separadamente, então a última pode não alinhar com as de cima.',
+};
+
 const caixa = document.querySelector('[data-caixa]');
 const eixos = document.querySelector('[data-eixos]');
 const codigo = document.querySelector('[data-codigo]');
@@ -57,6 +86,7 @@ const sliderLargura = document.getElementById('largura-item');
 const total = document.querySelector('[data-total]');
 const saidaLargura = document.querySelector('[data-largura-item]');
 const situacao = document.querySelector('[data-situacao]');
+const explicacao = document.querySelector('[data-explicacao]');
 
 let estado = {};
 
@@ -208,6 +238,14 @@ function atualizar() {
     estado.direcao === 'flex-column' ? 'column' : 'row';
 
   saidaLargura.textContent = `${largura}px`;
+
+  explicacao.innerHTML = OPCOES.map(
+    (o) => `
+      <li>
+        <strong>${estado[o.id]}</strong>
+        <span>${EXPLICACAO[estado[o.id]]}</span>
+      </li>`
+  ).join('');
 
   codigo.innerHTML =
     `<span class="tag">&lt;div class=</span>` +

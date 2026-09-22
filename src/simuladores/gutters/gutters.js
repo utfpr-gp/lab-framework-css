@@ -12,6 +12,39 @@ const ESCALA = [0, 0.25, 0.5, 1, 1.5, 3];
 const REM_EM_PX = 16;
 const COLUNAS = 4;
 
+/**
+ * O que cada direção mexe — e por qual mecanismo.
+ *
+ * A pergunta que sempre aparece é por que gy parece não fazer nada
+ * em algumas telas: é que ele age no espaço ENTRE fileiras, e com
+ * uma fileira só não há entre nenhum.
+ */
+const DIRECAO = {
+  g: {
+    titulo: 'g-*',
+    texto:
+      'Mexe nos dois eixos de uma vez. Na horizontal vira padding nas ' +
+      'colunas (metade de cada lado) mais margem negativa na row; na ' +
+      'vertical vira margem no topo de cada coluna. É o que você quer ' +
+      'na maioria dos casos.',
+  },
+  gx: {
+    titulo: 'gx-*',
+    texto:
+      'Só o eixo horizontal: o espaço entre colunas lado a lado. Feito ' +
+      'com padding nas colunas e margem negativa na row, para as pontas ' +
+      'continuarem alinhadas com o resto da página.',
+  },
+  gy: {
+    titulo: 'gy-*',
+    texto:
+      'Só o eixo vertical: o espaço entre uma fileira e a de baixo. ' +
+      'Feito com margin-top em cada coluna — valor inteiro, não metade. ' +
+      'Se todas as colunas couberem numa fileira só, não há o que ' +
+      'separar e ele parece não fazer nada. Diminua a tela para ver.',
+  },
+};
+
 const estado = { degrau: 3, direcao: 'g', pintura: 'interna' };
 
 const slider = document.getElementById('degrau');
@@ -20,6 +53,7 @@ const container = document.querySelector('.demo-container');
 const marcas = document.querySelector('[data-escala]');
 const nota = document.querySelector('[data-nota]');
 const codigo = document.querySelector('[data-codigo]');
+const explicacao = document.querySelector('[data-explicacao]');
 
 const saida = {
   classe: document.querySelector('[data-classe]'),
@@ -104,15 +138,22 @@ function atualizar() {
   container.classList.toggle('pinta-padding', interna);
   container.classList.toggle('pinta-coluna', !interna);
 
-  // gx só mexe no horizontal, gy só no vertical — o outro fica no
-  // padrão do Bootstrap, que é 1.5rem
-  const PADRAO_PX = 24;
-  const horizontal = estado.direcao === 'gy' ? PADRAO_PX : px;
-  const vertical = estado.direcao === 'gx' ? PADRAO_PX : px;
+  // gx só mexe no horizontal e gy só no vertical. O eixo que não foi
+  // tocado fica no padrão do Bootstrap — e os padrões são DIFERENTES:
+  // --bs-gutter-x nasce em 1.5rem, --bs-gutter-y nasce em 0.
+  const PADRAO_X = 24;
+  const PADRAO_Y = 0;
+  const horizontal = estado.direcao === 'gy' ? PADRAO_X : px;
+  const vertical = estado.direcao === 'gx' ? PADRAO_Y : px;
 
   saida.classe.textContent = classeAtual();
   saida.px.textContent = `${horizontal}px na horizontal, ${vertical}px na vertical`;
-  saida.metade.textContent = `${horizontal / 2}px de padding em cada coluna`;
+  saida.metade.textContent =
+    `${horizontal / 2}px de padding em cada coluna · ` +
+    `${vertical}px de margem no topo de cada uma`;
+
+  const escolha = DIRECAO[estado.direcao];
+  explicacao.innerHTML = `<strong>${escolha.titulo}</strong><br />${escolha.texto}`;
 
   marcas.querySelectorAll('span').forEach((m) => {
     m.classList.toggle('ativo', Number(m.dataset.degrau) === estado.degrau);

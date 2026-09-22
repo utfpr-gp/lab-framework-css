@@ -23,8 +23,58 @@ const estado = {
   validacao: '',
 };
 
+/**
+ * Explicação de cada escolha. Duas delas têm pegadinha de verdade:
+ * a inversão de ordem do form-floating e o fato de is-valid /
+ * is-invalid serem só classes, sem nenhuma validação por trás.
+ */
+const EXPLICACAO = {
+  rotulo: {
+    acima: {
+      titulo: 'label em cima',
+      texto:
+        'O jeito tradicional: <code>&lt;label&gt;</code> com a classe ' +
+        '<code>form-label</code>, depois o campo. O atributo ' +
+        '<code>for</code> tem que apontar para o <code>id</code> do campo — ' +
+        'é isso que faz clicar no rótulo focar o campo e que permite ao ' +
+        'leitor de tela anunciar os dois juntos.',
+    },
+    flutuante: {
+      titulo: 'form-floating',
+      texto:
+        'O rótulo começa dentro do campo e sobe quando há conteúdo. Repare ' +
+        'no código: aqui o <code>&lt;input&gt;</code> vem ANTES do ' +
+        '<code>&lt;label&gt;</code>, ao contrário do normal. É proposital — ' +
+        'o CSS usa o seletor de irmão para mover o rótulo, e irmão só ' +
+        'enxerga quem vem depois. Trocar a ordem quebra o efeito.',
+    },
+  },
+  validacao: {
+    '': {
+      titulo: 'neutro',
+      texto: 'Nenhum estado aplicado. É como o campo nasce.',
+    },
+    'is-valid': {
+      titulo: 'is-valid',
+      texto:
+        'Pinta a borda de verde e mostra a <code>valid-feedback</code>. ' +
+        'Repare que é só uma classe: o Bootstrap não verificou nada. Quem ' +
+        'decide que o campo está válido é o seu JavaScript.',
+    },
+    'is-invalid': {
+      titulo: 'is-invalid',
+      texto:
+        'Pinta a borda de vermelho e revela a <code>invalid-feedback</code>, ' +
+        'que fica escondida até esta classe aparecer. De novo: é só classe. ' +
+        'A mensagem não sabe qual foi o erro — quem escreve o texto certo ' +
+        'é você.',
+    },
+  },
+};
+
 const form = document.querySelector('[data-formulario]');
 const codigo = document.querySelector('[data-codigo]');
+const explicacao = document.querySelector('[data-explicacao]');
 
 const saida = {
   largura: document.querySelector('[data-largura]'),
@@ -97,6 +147,18 @@ function montarFormulario() {
 // -------------------------------------------------------------
 //  Código de exemplo, sempre do primeiro campo
 // -------------------------------------------------------------
+/** Mostra a explicação das duas escolhas que têm pegadinha. */
+function montarExplicacao() {
+  const partes = [
+    EXPLICACAO.rotulo[estado.rotulo],
+    EXPLICACAO.validacao[estado.validacao],
+  ];
+
+  explicacao.innerHTML = partes
+    .map((p) => `<strong>${p.titulo}</strong> — ${p.texto}`)
+    .join('<br /><br />');
+}
+
 function montarCodigo() {
   const campo = CAMPOS[0];
   const classes = classesDoCampo(campo);
@@ -135,6 +197,7 @@ function ligarBotoes(seletor, campo) {
     estado[campo] = botao.dataset.valor;
     montarFormulario();
     montarCodigo();
+    montarExplicacao();
     atualizar();
   });
 }
@@ -145,6 +208,7 @@ ligarBotoes('[data-validacao]', 'validacao');
 
 montarFormulario();
 montarCodigo();
+montarExplicacao();
 
 const { atualizar } = criarPalco({
   slider: document.getElementById('largura'),

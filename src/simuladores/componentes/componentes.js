@@ -47,6 +47,10 @@ const COMPONENTES = [
       {
         id: 'estilo',
         titulo: 'Estilo',
+        dica:
+          'O de contorno pinta só a borda e o texto; o fundo fica transparente ' +
+          'e só aparece no hover. Use-o para a ação secundária ao lado da ' +
+          'principal — dois botões preenchidos lado a lado competem entre si.',
         tipo: 'escolha',
         padrao: 'solido',
         valores: [
@@ -67,7 +71,18 @@ const COMPONENTES = [
       },
       { id: 'pill', titulo: 'Formato', tipo: 'toggle', classe: 'rounded-pill', rotulo: 'rounded-pill' },
       { id: 'largura', titulo: 'Largura', tipo: 'toggle', classe: 'w-100', rotulo: 'w-100' },
-      { id: 'estado', titulo: 'Estado', tipo: 'toggle', classe: 'disabled', rotulo: 'disabled' },
+      {
+        id: 'estado',
+        titulo: 'Estado',
+        tipo: 'toggle',
+        classe: 'disabled',
+        rotulo: 'disabled',
+        dica:
+          'Em <button> o certo é o ATRIBUTO disabled, que além de apagar o ' +
+          'visual impede o clique de verdade. A classe .disabled existe para ' +
+          '<a>, que não aceita o atributo. Repare no código: aqui aparecem os ' +
+          'dois.',
+      },
     ],
     classes(estado) {
       const cor =
@@ -89,7 +104,17 @@ const COMPONENTES = [
     opcoes: [
       opcaoCor,
       { id: 'titulo', titulo: 'Título', tipo: 'toggle', classe: 'sim', rotulo: 'alert-heading' },
-      { id: 'fechar', titulo: 'Botão de fechar', tipo: 'toggle', classe: 'alert-dismissible', rotulo: 'alert-dismissible' },
+      {
+        id: 'fechar',
+        titulo: 'Botão de fechar',
+        tipo: 'toggle',
+        classe: 'alert-dismissible',
+        rotulo: 'alert-dismissible',
+        dica:
+          'Este é o único aqui que precisa do JavaScript do Bootstrap: sem ele ' +
+          'o X aparece mas não fecha nada. O data-bs-dismiss é quem liga o ' +
+          'botão ao componente.',
+      },
     ],
     classes(estado) {
       return ['alert', `alert-${estado.variante}`, estado.fechar];
@@ -143,7 +168,17 @@ const COMPONENTES = [
     nome: 'Card',
     opcoes: [
       opcaoCor,
-      { id: 'cabecalho', titulo: 'Cabeçalho', tipo: 'toggle', classe: 'sim', rotulo: 'card-header' },
+      {
+        id: 'cabecalho',
+        titulo: 'Cabeçalho',
+        tipo: 'toggle',
+        classe: 'sim',
+        rotulo: 'card-header',
+        dica:
+          'O card é montado por partes: header, body e footer são divs com ' +
+          'classe própria, não atributos. Você usa só as que precisar, e a ' +
+          'ordem no HTML é a ordem na tela.',
+      },
       { id: 'rodape', titulo: 'Rodapé', tipo: 'toggle', classe: 'sim', rotulo: 'card-footer' },
       { id: 'centro', titulo: 'Alinhamento', tipo: 'toggle', classe: 'text-center', rotulo: 'text-center' },
     ],

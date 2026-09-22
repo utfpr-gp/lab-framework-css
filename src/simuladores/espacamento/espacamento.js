@@ -20,12 +20,41 @@ const ESCALA = [
 
 const REM_EM_PX = 16;
 
+/** A diferença que o bloco colorido mostra, dita em palavras. */
+const PROPRIEDADE = {
+  m: {
+    titulo: 'm · margin',
+    texto:
+      'Espaço por FORA do elemento. Ele empurra o próprio elemento para ' +
+      'longe dos vizinhos e das bordas do pai. O fundo colorido do ' +
+      'elemento NÃO acompanha: a margem é área vazia.',
+  },
+  p: {
+    titulo: 'p · padding',
+    texto:
+      'Espaço por DENTRO do elemento. O elemento continua do mesmo tamanho ' +
+      'por fora e empurra o próprio conteúdo para o miolo. O fundo colorido ' +
+      'acompanha — é por isso que o anel roxo aparece.',
+  },
+};
+
+const LADO = {
+  '': 'todos os quatro lados',
+  t: 'só em cima (top)',
+  b: 'só embaixo (bottom)',
+  s: 'só no início da linha (start) — à esquerda em português',
+  e: 'só no fim da linha (end) — à direita em português',
+  x: 'esquerda e direita ao mesmo tempo',
+  y: 'em cima e embaixo ao mesmo tempo',
+};
+
 const estado = { propriedade: 'm', lado: '', degrau: 3 };
 
 const slider = document.getElementById('degrau');
 const elemento = document.querySelector('[data-elemento]');
 const marcasEscala = document.querySelector('[data-escala]');
 const tabela = document.querySelector('[data-tabela]');
+const explicacao = document.querySelector('[data-explicacao]');
 
 const saida = {
   classe: document.querySelector('[data-classe]'),
@@ -97,6 +126,11 @@ function atualizar() {
   saida.classe.textContent = classe;
   saida.rem.textContent = `${item.fator}rem`;
   saida.px.textContent = `${item.fator * REM_EM_PX}px`;
+
+  const prop = PROPRIEDADE[estado.propriedade];
+  explicacao.innerHTML =
+    `<strong>${prop.titulo}</strong> — ${prop.texto}<br /><br />` +
+    `<strong>${classe}</strong> aplica isso em ${LADO[estado.lado]}.`;
 
   marcasEscala.querySelectorAll('span').forEach((marca) => {
     marca.classList.toggle(
